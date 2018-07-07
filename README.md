@@ -1,16 +1,16 @@
-Routing : Express
-ORM Database : Sequelize
-Authentication : Passport, JWT
+##### Routing : Express
+##### ORM Database : Sequelize
+##### Authentication : Passport, JWT
 
-Install Node Modules
+##### Install Node Modules
     npm install
 
-db configs
+##### db configs
 /configs/config.js
 
 url: localhost:3000/v1
 
-users
+###### users
 /users/create
 /users/login
 /users/get
