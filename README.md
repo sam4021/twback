@@ -1,4 +1,18 @@
-SMS Will have 160 characters 
-sms api is php based
+Routing : Express
+ORM Database : Sequelize
+Authentication : Passport, JWT
 
-can get the mpesa api from ibrahim
+Install Node Modules
+    npm install
+
+db configs
+/configs/config.js
+
+url: localhost:3000/v1
+
+users
+/users/create
+/users/login
+/users/get
+/users/update
+/users/remove
