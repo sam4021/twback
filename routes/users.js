@@ -11,7 +11,7 @@ require('./../middleware/passport')(passport)
 //     res.send("test");
 // });
 
-router.post(    '/create',           UserController.create);                                                 // C
+router.post(    '/users/create',           UserController.create);                                                 // C
 router.get(     '/users',           passport.authenticate('jwt', {session:false}), UserController.get);        // R
 router.put(     '/users',           passport.authenticate('jwt', {session:false}), UserController.update);     // U
 router.delete(  '/users',           passport.authenticate('jwt', {session:false}), UserController.remove);     // D

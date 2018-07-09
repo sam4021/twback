@@ -21,9 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         amount_paid : DataTypes.INTEGER ,
         transaction_ID : DataTypes.STRING,
-        type_of_transaction : DataTypes.STRING,
-        created_at: {type: DataTypes.DATE,allowNull: false},
-        updated_at:  DataTypes.DATE
+        type_of_transaction : DataTypes.STRING
     });
 
     Model.prototype.getJWT = function () {

@@ -21,9 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         policy_id: {
             type: DataTypes.UUID,
             allowNull: false
-        },
-        created_at: {type: DataTypes.DATE,allowNull: false},
-        updated_at:  DataTypes.DATE
+        }
     });
 
     Model.prototype.getJWT = function () {

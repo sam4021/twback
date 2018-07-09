@@ -18,10 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         occupation: DataTypes.STRING,
         user_id: {
             type: DataTypes.UUID,
-            allowNull: false
-          },
-        created_at: {type: DataTypes.DATE,allowNull: false},
-        updated_at:  DataTypes.DATE
+            allowNull: false,
+            references: {
+                model: 'users',
+                key: 'id'
+              }
+          }
     });
 
     Model.prototype.getJWT = function () {

@@ -23,21 +23,22 @@ const createUser = async function(userInfo){
     auth_info={}
     auth_info.status='create';
 
-    unique_key = getUniqueKeyFromBody(userInfo); console.log(unique_key);
+    unique_key = getUniqueKeyFromBody(userInfo);
     
     if(!unique_key) TE('An email or phone number was not entered.');
 
-    if(validator.isEmail(unique_key)){
+    if(validator.isEmail(unique_key)){ 
         auth_info.method = 'email';
         userInfo.email = unique_key;
 
-        [err, user] = await to(User.create(userInfo));
+        [err, user] = await to(User.create(userInfo)); console.log(err);
+        
         if(err) TE('user already exists with that email');
-
+        
         return user;
 
     }else if(validator.isMobilePhone(unique_key, 'any')){//checks if only phone number was sent
-        auth_info.method = 'phone';
+        auth_info.method = 'phone'; 
         userInfo.phone = unique_key;
 
         [err, user] = await to(User.create(userInfo));

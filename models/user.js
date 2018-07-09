@@ -9,17 +9,15 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4,
-            allowNull: false
+            allowNull: false 
           },
         first     : DataTypes.STRING,
         middle    : DataTypes.STRING,
-        last      : DataTypes.STRING,
+        last      : DataTypes.STRING, 
         id_number : {type: DataTypes.STRING, unique: true },
         email     : {type: DataTypes.STRING, unique: true, validate: { isEmail: {msg: "Phone number invalid."} }},
         phone     : {type: DataTypes.STRING, unique: true, validate: { len: {args: [7, 20], msg: "Phone number invalid, too short."}, isNumeric: { msg: "not a valid phone number."} }},
-        password  : DataTypes.STRING,
-        created_at: {type: DataTypes.DATE,allowNull: false},
-        updated_at:  DataTypes.DATE  
+        password  : DataTypes.STRING, 
     });
 
     Model.beforeSave(async (user, options) => {
