@@ -14,7 +14,6 @@ url: localhost:3000/v1
 ```
 /users/create
 POST
-```json
 {
 	"first":"xxx",
 	"middle":"xxxx",
@@ -26,7 +25,6 @@ POST
 }
 
 Results
-```json
 {
     "message": "Successfully created new user.",
     "user": {
@@ -45,20 +43,18 @@ Results
     "success": true
 }
 /users/login
-```json
+
 {
 	"email":"xxx@xx.xx",
 	"password":"xxx"
 }
 or
-```json
 {
 	"phone":"xxx",
 	"password":"xxx"
 }
 
 Results
-```json
 {
     "token": "Bearer xxx",
     "user": {
