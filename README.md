@@ -72,6 +72,31 @@ Results
     "success": true
 }
 /users/get
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+Results
+{
+    "user": {
+        "id": "xxxx",
+        "first": "xxxx",
+        "middle": "xxx",
+        "last": "xxx",
+        "id_number": "xxxx",
+        "email": "xxxx",
+        "phone": "xx",
+        "password": "xxxx",
+        "createdAt": "2018-07-09T12:24:44.000Z",
+        "updatedAt": "2018-07-09T12:24:44.000Z"
+    },
+    "success": true
+}
 /users/update
-/users/remove
+
+--provide the fields for editing
+
+Results
+{
+    "message": "Updated User: xxx@xxx.xxx",
+    "success": true
+}
 ```

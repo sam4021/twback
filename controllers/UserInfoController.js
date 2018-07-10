@@ -3,20 +3,37 @@ const authService   = require('./../services/AuthService');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
-    const body = req.body;
+    //let err, user;
+    const user_info = req.body;
+    let user = req.user;
+    console.log(user_info);
+    console.log(user);
+    
 
-    if(!body.unique_key && !body.email && !body.phone){
-        return ReE(res, 'Please enter an email or phone number to register.');
-    } else if(!body.password){
-        return ReE(res, 'Please enter a password to register.');
-    }else{
-        let err, user;
+    [err, user] = await to(User.create(user_info));
+    if(err) return ReE(res, err, 422);
 
-        [err, user] = await to(authService.createUser(body));
+    company.addUser(user, { through: { status: 'started' }})
 
-        if(err) return ReE(res, err, 422);
-        return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
-    }
+    [err, company] = await to(company.save());
+    if(err) return ReE(res, err, 422);
+
+    let company_json = company.toWeb();
+    company_json.users = [{user:user.id}];
+
+    return ReS(res,{company:company_json}, 201);
+    // if(!body.unique_key && !body.email && !body.phone){
+    //     return ReE(res, 'Please enter an email or phone number to register.');
+    // } else if(!body.password){
+    //     return ReE(res, 'Please enter a password to register.');
+    // }else{
+    //     let err, user;
+
+    //     [err, user] = await to(authService.createUser(body));
+
+    //     if(err) return ReE(res, err, 422);
+    //     return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
+    // }
 }
 module.exports.create = create;
 

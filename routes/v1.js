@@ -2,6 +2,7 @@ const express 			= require('express');
 const router 			= express.Router();
 
 const UserController 	= require('./../controllers/UserController');
+const UserInfoController 	= require('./../controllers/UserInfoController');
 const HomeController 	= require('./../controllers/HomeController');
 
 const passport      	= require('passport');
@@ -14,11 +15,9 @@ router.get('/', function(req, res, next) {
   res.json({status:"success", message:"Parcel Pending API", data:{"version_number":"v1.0.0"}})
 });
 
-
 router.post(    '/users/create',    UserController.create);                                                 // C
 router.get(     '/users/get',       passport.authenticate('jwt', {session:false}), UserController.get);        // R
-router.put(     '/users',           passport.authenticate('jwt', {session:false}), UserController.update);     // U
-router.delete(  '/users',           passport.authenticate('jwt', {session:false}), UserController.remove);     // D
+router.put(     '/users/update',    passport.authenticate('jwt', {session:false}), UserController.update);     // D
 router.post(    '/users/login',     UserController.login);
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
