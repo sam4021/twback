@@ -1,4 +1,5 @@
-const User          = require('../models').user_info;
+const UserInfo          = require('../models').user_info;
+const User          = require('../models').user;
 const authService   = require('./../services/AuthService');
 
 const create = async function(req, res){
@@ -6,42 +7,26 @@ const create = async function(req, res){
     //let err, user;
     const user_info = req.body;
     let user = req.user;
-    console.log(user_info);
-    console.log(user);
-    
+    let user_id = req.user.id;
+    user_info['userId']= user_id;
 
-    [err, user] = await to(User.create(user_info));
+    [err, userInfo] = await to(UserInfo.create(user_info));
     if(err) return ReE(res, err, 422);
 
-    company.addUser(user, { through: { status: 'started' }})
-
-    [err, company] = await to(company.save());
-    if(err) return ReE(res, err, 422);
-
-    let company_json = company.toWeb();
-    company_json.users = [{user:user.id}];
-
-    return ReS(res,{company:company_json}, 201);
-    // if(!body.unique_key && !body.email && !body.phone){
-    //     return ReE(res, 'Please enter an email or phone number to register.');
-    // } else if(!body.password){
-    //     return ReE(res, 'Please enter a password to register.');
-    // }else{
-    //     let err, user;
-
-    //     [err, user] = await to(authService.createUser(body));
-
-    //     if(err) return ReE(res, err, 422);
-    //     return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
-    // }
-}
+    return ReS(res, {message:'Successfully Added User Details.', user:userInfo.toWeb(), token:userInfo.getJWT()}, 201);
+} 
 module.exports.create = create;
 
 const get = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let user = req.user;
+    let err;
 
-    return ReS(res, {user:user.toWeb()});
+        UserInfo.findOne({ where: { userId: user.id } }).then(user_info => {
+            console.log(user_info);
+            if(err) return ReE(res, err, 422);    
+            return ReS(res, {user:user_info});
+        });    
 }
 module.exports.get = get;
 
@@ -49,14 +34,17 @@ const update = async function(req, res){
     let err, user, data
     user = req.user;
     data = req.body;
-    user.set(data);
+    //user.set(data);
 
-    [err, user] = await to(user.save());
-    if(err){
-        if(err.message=='Validation error') err = 'The email address or phone number is already in use';
-        return ReE(res, err);
-    }
-    return ReS(res, {message :'Updated User: '+user.email});
+    console.log(user);
+    
+
+    // [err, user] = await to(user.save());
+    // if(err){
+    //     if(err.message=='Validation error') err = 'The email address or phone number is already in use';
+    //     return ReE(res, err);
+    // }
+    // return ReS(res, {message :'Updated User: '+user.email});
 }
 module.exports.update = update;
 

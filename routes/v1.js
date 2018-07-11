@@ -15,10 +15,14 @@ router.get('/', function(req, res, next) {
   res.json({status:"success", message:"Parcel Pending API", data:{"version_number":"v1.0.0"}})
 });
 
-router.post(    '/users/create',    UserController.create);                                                 // C
-router.get(     '/users/get',       passport.authenticate('jwt', {session:false}), UserController.get);        // R
-router.put(     '/users/update',    passport.authenticate('jwt', {session:false}), UserController.update);     // D
+router.post(    '/users/create',    UserController.create);                                                 
+router.get(     '/users/get',       passport.authenticate('jwt', {session:false}), UserController.get);        
+router.put(     '/users/update',    passport.authenticate('jwt', {session:false}), UserController.update);     
 router.post(    '/users/login',     UserController.login);
+
+router.post(     '/user_info/create',       passport.authenticate('jwt', {session:false}), UserInfoController.create);  
+router.get(     '/user_info/get',       passport.authenticate('jwt', {session:false}), UserInfoController.get);        
+router.post(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);        
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

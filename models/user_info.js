@@ -1,6 +1,4 @@
 'use strict';
-const bcrypt 			= require('bcrypt');
-const bcrypt_p 			= require('bcrypt-promise');
 const jwt           	= require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
@@ -15,15 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         date_of_birth: DataTypes.STRING,
         gender: DataTypes.STRING,
         branch: DataTypes.STRING,
-        occupation: DataTypes.STRING,
-        user_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'users',
-                key: 'id'
-              }
-          }
+        occupation: DataTypes.STRING
     });
 
     Model.prototype.getJWT = function () {

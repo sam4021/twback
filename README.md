@@ -100,3 +100,39 @@ Results
     "success": true
 }
 ```
+###### Users Info
+
+/user_info/get
+```
+GET
+
+Results
+{
+    "user": {
+            "id": "xxx",
+            "nationality": "xxx",
+            "date_of_birth": "xxx",
+            "gender": "xxx",
+            "branch": "xxx",
+            "occupation": "xxx",
+            "createdAt": "2018-07-11T09:48:02.000Z",
+            "updatedAt": "2018-07-11T09:48:02.000Z",
+            "userId": "xxx"
+    },
+    "success": true
+}
+```
+
+```
+/user_info/create
+POST
+{
+	"nationality":"kenyan",
+	"date_of_birth": "xx-xx-xxxx",
+    "gender": "xxx",
+    "branch": "xxx",
+    "occupation": "xxx"
+}
+
+Results
+```
