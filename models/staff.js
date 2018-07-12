@@ -4,7 +4,7 @@ const bcrypt_p 			= require('bcrypt-promise');
 const jwt           	= require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
-    var Model = sequelize.define('users', {
+    var Model = sequelize.define('staffs', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,

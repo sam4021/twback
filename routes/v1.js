@@ -3,6 +3,7 @@ const router 			= express.Router();
 
 const UserController 	= require('./../controllers/UserController');
 const UserInfoController 	= require('./../controllers/UserInfoController');
+const BeneficiaryController 	= require('./../controllers/BeneficiaryController');
 const HomeController 	= require('./../controllers/HomeController');
 
 const passport      	= require('passport');
@@ -22,7 +23,10 @@ router.post(    '/users/login',     UserController.login);
 
 router.post(     '/user_info/create',       passport.authenticate('jwt', {session:false}), UserInfoController.create);  
 router.get(     '/user_info/get',       passport.authenticate('jwt', {session:false}), UserInfoController.get);        
-router.post(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);        
+router.put(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);  
+
+router.post(     '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
+router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);         
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

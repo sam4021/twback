@@ -4,7 +4,7 @@ const bcrypt_p 			= require('bcrypt-promise');
 const jwt           	= require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
-    var Model = sequelize.define('`beneficiary`', {
+    var Model = sequelize.define('beneficiary', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
           id_number : {type: DataTypes.STRING, unique: true },
           email     : {type: DataTypes.STRING, unique: true, validate: { isEmail: {msg: "Phone number invalid."} }},
           phone     : {type: DataTypes.STRING, unique: true, validate: { len: {args: [7, 20], msg: "Phone number invalid, too short."}, isNumeric: { msg: "not a valid phone number."} }},
-        user_id: {
-            type: DataTypes.UUID,
-            allowNull: false
-        }
     });
 
     Model.prototype.getJWT = function () {

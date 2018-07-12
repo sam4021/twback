@@ -8,7 +8,12 @@
 ##### db configs
 /configs/config.js
 
-url: localhost:3000/v1
+##### URL:
+
+```
+localhost:3000/v1
+https://twback.herokuapp.com/v1
+```
 
 ###### users
 ```
@@ -104,7 +109,7 @@ Results
 
 /user_info/get
 ```
-GET
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
 
 Results
 {
@@ -125,7 +130,7 @@ Results
 
 ```
 /user_info/create
-POST
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
 {
 	"nationality":"kenyan",
 	"date_of_birth": "xx-xx-xxxx",
@@ -136,3 +141,64 @@ POST
 
 Results
 ```
+
+```
+/user_info/update
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+	"nationality":"kenyan",
+	"date_of_birth": "xx-xx-xxxx",
+    "gender": "xxx",
+    "branch": "xxx",
+    "occupation": "xxx"
+}
+
+Results
+{
+    "message": "User Info Update ",
+    "success": true
+}
+```
+
+###### Users Beneficiary Info
+
+```
+/user_beneficiary/create
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"first"     : "xxx",
+    "middle"    : "xxx",
+    "last"      : "xxx",
+    "relation"  : "xxx",
+    "id_number" : "xxx",
+    "email"     : "xxx@xxx.xxx",
+    "phone" 	: "xxx"
+}
+
+Results
+{
+    "message": "Successfully Added User Beneficiary.",
+    "user": {
+        "id": "xxx",
+        "first": "xxx",
+        "middle": "xxx",
+        "last": "xxx",
+        "relation": "xxx",
+        "id_number": "xxx",
+        "email": "xxx@xxx.xxx",
+        "phone": "xxx",
+        "userId": "xxx",
+        "updatedAt": "2018-07-12T14:19:04.622Z",
+        "createdAt": "2018-07-12T14:19:04.622Z"
+    },
+    "success": true
+}
+```
+
+80%
+webservice 
+two weeks
+security to end
+
+1k for every missed call/interaction
