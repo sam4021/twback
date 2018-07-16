@@ -16,32 +16,7 @@ https://twback.herokuapp.com/v1
 ```
 url | Action | Fields passed | Results
 --- | --- | --- | ---
-*/users/create* | **POST** | {
-	"first":"xxx",
-	"middle":"xxxx",
-	"last":"xxx",
-	"email":"xxx@xx.xx",
-	"id_number":"xxxxx",
-	"phone":"xxx",
-	"password":"xxx"
-} | {
-    "message": "Successfully created new user.",
-    "user": {
-        "id": "xxxx",
-        "first": "xxx",
-        "middle": "xxx",
-        "last": "xxx",
-        "email": "xxx",
-        "id_number": "xxx",
-        "phone": "xxx",
-        "password": "xxxx",
-        "updatedAt": "2018-07-09T12:24:44.141Z",
-        "createdAt": "2018-07-09T12:24:44.141Z"
-    },
-    "token": "Bearer xxxx",
-    "admin": 'boolean'
-    "success": true
-}
+*/users/create* | **POST** | {"first":"xxx","middle":"xxxx","last":"xxx","email":"xxx@xx.xx","id_number":"xxxxx","phone":"xxx","password":"xxx"} | {"message":"Successfully created new user.","user": {"id": "xxxx","first": "xxx","middle": "xxx","last": "xxx","email": "xxx","id_number": "xxx","phone": "xxx","password": "xxxx","updatedAt": "2018-07-09T12:24:44.141Z","createdAt": "2018-07-09T12:24:44.141Z"},"token":"Bearer xxxx","admin": 'boolean'"success": true}
 
 
 ###### users
