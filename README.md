@@ -20,15 +20,15 @@ https://twback.herokuapp.com/v1
 url | Action 
 --- | ---
 */users/create* | **POST** 
-/users/login | **POST** 
-/users/get | **GET**
-/users/update | **POST**
-/user_info/get | **GET**
-/user_info/create | **POST**
-/user_info/update | **POST**
-/user_beneficiary/create | **POST**
-/user_beneficiary/get | **GET**
-/user_beneficiary/update | **GET**
+*/users/login* | **POST** 
+*/users/get* | **GET**
+*/users/update* | **POST**
+*/user_info/get* | **GET**
+*/user_info/create* | **POST**
+*/user_info/update* | **POST**
+*/user_beneficiary/create* | **POST**
+*/user_beneficiary/get* | **GET**
+*/user_beneficiary/update* | **GET**
 
 ##### Admin:
 ```
