@@ -1,7 +1,5 @@
-require('../config/config');
-const User          = require('../models').user;
-const authService   = require('./../services/AuthService');
-const validator     = require('validator');
+const Staff         = require('../../models').staff;
+const authService   = require('./../../services/AuthService');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -12,12 +10,12 @@ const create = async function(req, res){
     } else if(!body.password){
         return ReE(res, 'Please enter a password to register.');
     }else{
-        let err, user;
+        let err, staff;
 
-        [err, user] = await to(authService.createUser(body));
+        [err, staff] = await to(authService.createStaff(body));
 
         if(err) return ReE(res, err, 422);
-        return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
+        return ReS(res, {message:'Successfully created new Staff.', staff:staff.toWeb(), token:staff.getJWT()}, 201);
     }
 }
 module.exports.create = create;
@@ -61,20 +59,9 @@ const login = async function(req, res){
     const body = req.body;
     let err, user;
 
-var email = body.email;
-var domain = email.substring(email.lastIndexOf("@") +1);
+    [err, user] = await to(authService.authUser(body));
+    if(err) return ReE(res, err, 422);
 
-    if(validator.isEmail(email) && domain==CONFIG.staff_email){ 
-        console.log("Is valid email" + email);
-        [err, user] = await to(authService.authStaff(body));
-        if(err) return ReE(res, err, 422);
-
-        return ReS(res, {token:user.getJWT(), user:user.toWeb(),admin:true});
-    } else{
-        [err, user] = await to(authService.authUser(body));
-        if(err) return ReE(res, err, 422);
-
-        return ReS(res, {token:user.getJWT(), user:user.toWeb(),admin:false});
-    }
+    return ReS(res, {token:user.getJWT(), user:user.toWeb()});
 }
 module.exports.login = login;

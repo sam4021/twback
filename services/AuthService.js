@@ -1,4 +1,5 @@
 const User 			= require('./../models').users;
+const Staff 			= require('./../models').staffs;
 const validator     = require('validator');
 
 const getUniqueKeyFromBody = function(body){// this is so they can send in 3 options unique_key, email, or phone and it will work
@@ -91,3 +92,70 @@ const authUser = async function(userInfo){//returns token
 
 }
 module.exports.authUser = authUser;
+
+const createStaff = async function(staffInfo){
+    let unique_key, auth_info, err;
+
+    auth_info={}
+    auth_info.status='create';
+
+    unique_key = getUniqueKeyFromBody(staffInfo);
+    
+    if(!unique_key) TE('An email or phone number was not entered.');
+
+    if(validator.isEmail(unique_key)){ 
+        auth_info.method = 'email';
+        staffInfo.email = unique_key;
+
+        [err, staff] = await to(Staff.create(staffInfo)); console.log(err);
+        
+        if(err) TE('staff already exists with that email');
+        
+        return staff;
+
+    }else if(validator.isMobilePhone(unique_key, 'any')){//checks if only phone number was sent
+        auth_info.method = 'phone'; 
+        staffInfo.phone = unique_key;
+
+        [err, staff] = await to(Staff.create(staffInfo));
+        if(err) TE('user already exists with that phone number');
+
+        return staff;
+    }else{
+        TE('A valid email or phone number was not entered.');
+    }
+}
+module.exports.createStaff = createStaff;
+
+const authStaff = async function(userInfo){
+    let unique_key;
+    let auth_info = {};
+    auth_info.status = 'login';
+    unique_key = getUniqueKeyFromBody(userInfo);
+
+    if(!unique_key) TE('Please enter an email to login');
+
+    if(!userInfo.password) TE('Please enter a password to login');
+
+    let user;
+    if(validator.isEmail(unique_key)){
+        auth_info.method='email';
+
+        [err, user] = await to(Staff.findOne({where:{email:unique_key}}));
+        console.log("valid:Email"+err, user, unique_key);
+        if(err) TE(err.message);
+        
+    }else{
+        TE('A valid email was not entered');
+    }
+
+    if(!user) TE('Not registered');
+
+    [err, user] = await to(user.comparePassword(userInfo.password));
+
+    if(err) TE(err.message);
+    
+    return user;
+
+}
+module.exports.authStaff = authStaff;

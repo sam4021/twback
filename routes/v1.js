@@ -1,10 +1,14 @@
 const express 			= require('express');
 const router 			= express.Router();
 
+//User Controllers
 const UserController 	= require('./../controllers/UserController');
 const UserInfoController 	= require('./../controllers/UserInfoController');
 const BeneficiaryController 	= require('./../controllers/BeneficiaryController');
 const HomeController 	= require('./../controllers/HomeController');
+
+//Admin Contollers
+const StaffController 	= require('./../controllers/Admin/StaffController');
 
 const passport      	= require('passport');
 const path              = require('path');
@@ -26,7 +30,11 @@ router.get(     '/user_info/get',       passport.authenticate('jwt', {session:fa
 router.put(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);  
 
 router.post(     '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
-router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);         
+router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);       
+router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
+router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
+
+router.post(     '/admin/staff/create',       passport.authenticate('jwt', {session:false}), StaffController.create);  
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

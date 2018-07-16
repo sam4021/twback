@@ -14,6 +14,35 @@
 localhost:3000/v1
 https://twback.herokuapp.com/v1
 ```
+url | Action | Fields passed | Results
+--- | --- | --- | ---
+*/users/create* | **POST** | {
+	"first":"xxx",
+	"middle":"xxxx",
+	"last":"xxx",
+	"email":"xxx@xx.xx",
+	"id_number":"xxxxx",
+	"phone":"xxx",
+	"password":"xxx"
+} | {
+    "message": "Successfully created new user.",
+    "user": {
+        "id": "xxxx",
+        "first": "xxx",
+        "middle": "xxx",
+        "last": "xxx",
+        "email": "xxx",
+        "id_number": "xxx",
+        "phone": "xxx",
+        "password": "xxxx",
+        "updatedAt": "2018-07-09T12:24:44.141Z",
+        "createdAt": "2018-07-09T12:24:44.141Z"
+    },
+    "token": "Bearer xxxx",
+    "admin": 'boolean'
+    "success": true
+}
+
 
 ###### users
 ```
@@ -45,6 +74,7 @@ Results
         "createdAt": "2018-07-09T12:24:44.141Z"
     },
     "token": "Bearer xxxx",
+    "admin": 'boolean'
     "success": true
 }
 /users/login
@@ -196,9 +226,66 @@ Results
 }
 ```
 
+```
+/user_beneficiary/get
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+Results
+{
+    "user": {
+        "id": "xxxxx",
+        "first": "xx",
+        "middle": "xx",
+        "last": "xx",
+        "relation": "xx",
+        "id_number": "xx",
+        "email": "xx@xx.xx",
+        "phone": "xx",
+        "createdAt": "2018-07-12T14:19:04.000Z",
+        "updatedAt": "2018-07-12T14:19:04.000Z",
+        "userId": "xxxx"
+    },
+    "success": true
+}
+```
+```
+/user_beneficiary/update
+PUT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+	"first"     : "xxx",
+    "middle"    : "xxx",
+    "last"      : "xxx",
+    "relation"  : "xxx",
+    "id_number" : "xxx",
+    "email"     : "xxx@xxx.xxx",
+    "phone" 	: "xxx"
+}
+
+Results
+{
+    "message": "User Beneficiary Update ",
+    "success": true
+}
+```
+
 80%
 webservice 
 two weeks
 security to end
 
 1k for every missed call/interaction
+
+
+
+if success: 200, 201(registered/created), 202(logged), 204(get is empty)
+   Failed:  400, 404(page missing), 405, 406(Unauthorised), 409
+
+add admin: true/false after loggin
+
+
+transactions Model
+:user_id
+:transaction_code
+:name
+:date
