@@ -14,10 +14,31 @@
 localhost:3000/v1
 https://twback.herokuapp.com/v1
 ```
-url | Action | Fields passed | Results
---- | --- | --- | ---
-*/users/create* | **POST** | {"first":"xxx","middle":"xxxx","last":"xxx","email":"xxx@xx.xx","id_number":"xxxxx","phone":"xxx","password":"xxx"} | {"message":"Successfully created new user.","user": {"id": "xxxx","first": "xxx","middle": "xxx","last": "xxx","email": "xxx","id_number": "xxx","phone": "xxx","password": "xxxx","updatedAt": "2018-07-09T12:24:44.141Z","createdAt": "2018-07-09T12:24:44.141Z"},"token":"Bearer xxxx","admin": 'boolean'"success": true}
 
+##### Client:
+
+url | Action 
+--- | ---
+*/users/create* | **POST** 
+/users/login | **POST** 
+/users/get | **GET**
+/users/update | **POST**
+/user_info/get | **GET**
+/user_info/create | **POST**
+/user_info/update | **POST**
+/user_beneficiary/create | **POST**
+/user_beneficiary/get | **GET**
+/user_beneficiary/update | **GET**
+
+##### Admin:
+```
+admin login test:
+email: sam@geminia.co.ke
+password: wandah
+```
+url | Action 
+--- | ---
+*/users/create* | **POST** 
 
 ###### users
 ```
@@ -49,7 +70,6 @@ Results
         "createdAt": "2018-07-09T12:24:44.141Z"
     },
     "token": "Bearer xxxx",
-    "admin": 'boolean'
     "success": true
 }
 /users/login
@@ -79,6 +99,7 @@ Results
         "createdAt": "2018-07-09T12:24:44.000Z",
         "updatedAt": "2018-07-09T12:24:44.000Z"
     },
+    "admin": 'boolean',
     "success": true
 }
 /users/get
