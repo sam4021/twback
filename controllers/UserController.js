@@ -59,17 +59,16 @@ module.exports.remove = remove;
 
 const login = async function(req, res){
     const body = req.body;
-    let err, user;
+    let err, user, staff;
 
-var email = body.email;
-var domain = email.substring(email.lastIndexOf("@") +1);
+    var email = body.email;
+    var domain = email.substring(email.lastIndexOf("@") +1);
 
     if(validator.isEmail(email) && domain==CONFIG.staff_email){ 
-        console.log("Is valid email" + email);
-        [err, user] = await to(authService.authStaff(body));
+        [err, staff] = await to(authService.authStaff(body));
         if(err) return ReE(res, err, 422);
 
-        return ReS(res, {token:user.getJWT(), user:user.toWeb(),admin:true});
+        return ReS(res, {token:staff.getJWT(), user:staff.toWeb(),admin:true});
     } else{
         [err, user] = await to(authService.authUser(body));
         if(err) return ReE(res, err, 422);

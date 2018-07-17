@@ -3,20 +3,23 @@ const authService   = require('./../../services/AuthService');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
-    const body = req.body;    
+    const body = req.body; 
+    let user = req.user;   
 
-    if(!body.unique_key && !body.email && !body.phone){
-        return ReE(res, 'Please enter an email or phone number to register.');
-    } else if(!body.password){
-        return ReE(res, 'Please enter a password to register.');
-    }else{
-        let err, staff;
+    console.log(body);
+    //return ReS(res,user)
+    // if(!body.unique_key && !body.email && !body.phone){
+    //     return ReE(res, 'Please enter an email or phone number to register.');
+    // } else if(!body.password){
+    //     return ReE(res, 'Please enter a password to register.');
+    // }else{
+    //     let err, staff;
 
-        [err, staff] = await to(authService.createStaff(body));
+    //     [err, staff] = await to(authService.createStaff(body));
 
-        if(err) return ReE(res, err, 422);
-        return ReS(res, {message:'Successfully created new Staff.', staff:staff.toWeb(), token:staff.getJWT()}, 201);
-    }
+    //     if(err) return ReE(res, err, 422);
+    //     return ReS(res, {message:'Successfully created new Staff.', staff:staff.toWeb(), token:staff.getJWT()}, 201);
+    // }
 }
 module.exports.create = create;
 

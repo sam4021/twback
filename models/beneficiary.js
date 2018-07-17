@@ -1,6 +1,4 @@
 'use strict';
-const bcrypt 			= require('bcrypt');
-const bcrypt_p 			= require('bcrypt-promise');
 const jwt           	= require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
@@ -19,11 +17,6 @@ module.exports = (sequelize, DataTypes) => {
           email     : {type: DataTypes.STRING, unique: true, validate: { isEmail: {msg: "Phone number invalid."} }},
           phone     : {type: DataTypes.STRING, unique: true, validate: { len: {args: [7, 20], msg: "Phone number invalid, too short."}, isNumeric: { msg: "not a valid phone number."} }},
     });
-
-    Model.prototype.getJWT = function () {
-        let expiration_time = parseInt(CONFIG.jwt_expiration);
-        return "Bearer "+jwt.sign({user_id:this.id}, CONFIG.jwt_encryption, {expiresIn: expiration_time});
-    };
 
     Model.prototype.toWeb = function (pw) {
         let json = this.toJSON();

@@ -32,8 +32,7 @@ const createUser = async function(userInfo){
         auth_info.method = 'email';
         userInfo.email = unique_key;
 
-        [err, user] = await to(User.create(userInfo)); console.log(err);
-        
+        [err, user] = await to(User.create(userInfo));        
         if(err) TE('user already exists with that email');
         
         return user;
@@ -68,7 +67,6 @@ const authUser = async function(userInfo){//returns token
         auth_info.method='email';
 
         [err, user] = await to(User.findOne({where:{email:unique_key}}));
-        console.log("valid:Email"+err, user, unique_key);
         if(err) TE(err.message);
 
     }else if(validator.isMobilePhone(unique_key, 'any')){//checks if only phone number was sent
@@ -76,7 +74,6 @@ const authUser = async function(userInfo){//returns token
 
         [err, user] = await to(User.findOne({where:{phone:unique_key }}));
         if(err) TE(err.message);
-        console.log("valid:phone"+err, user, unique_key );
         
     }else{
         TE('A valid email or phone number was not entered');
@@ -107,8 +104,7 @@ const createStaff = async function(staffInfo){
         auth_info.method = 'email';
         staffInfo.email = unique_key;
 
-        [err, staff] = await to(Staff.create(staffInfo)); console.log(err);
-        
+        [err, staff] = await to(Staff.create(staffInfo));        
         if(err) TE('staff already exists with that email');
         
         return staff;
@@ -142,7 +138,6 @@ const authStaff = async function(userInfo){
         auth_info.method='email';
 
         [err, user] = await to(Staff.findOne({where:{email:unique_key}}));
-        console.log("valid:Email"+err, user, unique_key);
         if(err) TE(err.message);
         
     }else{
