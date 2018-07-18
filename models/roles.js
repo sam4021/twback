@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         description    : DataTypes.STRING
     });
 
+    // Model.associate = function(models){
+    //     this.staffs = this.belongsToMany(models.staffs, {through: 'staff_roles',foreignKey: 'roleId'});
+    // };
+
     Model.prototype.toWeb = function (pw) {
         let json = this.toJSON();
         return json;

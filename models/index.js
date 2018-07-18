@@ -41,7 +41,7 @@ db.notifications = require('./notifications.js')(sequelize, Sequelize);
 //db.passwords = require('./passwords.js')(sequelize, Sequelize);
 db.policies = require('./policies.js')(sequelize, Sequelize);
 db.transactions = require('./transactions.js')(sequelize, Sequelize);
-db.staff = require('./staff.js')(sequelize, Sequelize);
+db.staffs = require('./staff.js')(sequelize, Sequelize);
 db.staff_roles = require('./staff_roles.js')(sequelize, Sequelize);
 db.roles = require('./roles.js')(sequelize, Sequelize);
 
@@ -54,7 +54,9 @@ db.users.hasMany(db.notifications);
 db.policies.hasMany(db.user_policy);
 db.users.hasMany(db.transactions);
 db.policies.hasMany(db.transactions);  
-db.staff.hasMany(db.staff_roles);
+db.staffs.hasMany(db.staff_roles);
 db.roles.hasMany(db.staff_roles);
+db.staff_roles.belongsTo(db.staffs);
+db.staff_roles.belongsTo(db.roles);
 
 module.exports = db;

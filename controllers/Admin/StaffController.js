@@ -1,35 +1,48 @@
-const Staff         = require('../../models').staff;
+const Staff         = require('../../models').staffs;
 const authService   = require('./../../services/AuthService');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
+    let err ;
     const body = req.body; 
-    let user = req.user;   
+    let user = req.user;
+    body['staffId'] = user.id;   
 
-    console.log(body);
-    //return ReS(res,user)
-    // if(!body.unique_key && !body.email && !body.phone){
-    //     return ReE(res, 'Please enter an email or phone number to register.');
-    // } else if(!body.password){
-    //     return ReE(res, 'Please enter a password to register.');
-    // }else{
-    //     let err, staff;
+    [err, staff] = await to(Staff.findOne({where:{email:user.email}}));
+    if(err) TE(err.message);
+    
+    if(!body.unique_key && !body.email){
+        return ReE(res, 'Please enter an email to register.');
+    } else if(!body.password){
+        return ReE(res, 'Please enter a password to register.');
+    }else{
+        let err, staff;
 
-    //     [err, staff] = await to(authService.createStaff(body));
+        [err, staff] = await to(authService.createStaff(body));
 
-    //     if(err) return ReE(res, err, 422);
-    //     return ReS(res, {message:'Successfully created new Staff.', staff:staff.toWeb(), token:staff.getJWT()}, 201);
-    // }
+        if(err) return ReE(res, err, 422);
+        return ReS(res, {message:'Successfully created new Staff.', staff:staff.toWeb(), token:staff.getJWT()}, 201);
+    }
 }
 module.exports.create = create;
 
-const get = async function(req, res){
+const get_staff = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let user = req.user;
 
     return ReS(res, {user:user.toWeb()});
 }
-module.exports.get = get;
+module.exports.get_staff = get_staff;
+
+const get_all_staff = async function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    let user = req.user;
+    [err, staff] = await to(Staff.findAll({}));
+    if(err) TE(err.message);
+
+    return ReS(res, {staffs:staff});
+}
+module.exports.get_all_staff = get_all_staff;
 
 const update = async function(req, res){
     let err, user, data
@@ -56,15 +69,3 @@ const remove = async function(req, res){
     return ReS(res, {message:'Deleted User'}, 204);
 }
 module.exports.remove = remove;
-
-
-const login = async function(req, res){
-    const body = req.body;
-    let err, user;
-
-    [err, user] = await to(authService.authUser(body));
-    if(err) return ReE(res, err, 422);
-
-    return ReS(res, {token:user.getJWT(), user:user.toWeb()});
-}
-module.exports.login = login;

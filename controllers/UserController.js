@@ -2,6 +2,8 @@ require('../config/config');
 const User          = require('../models').user;
 const authService   = require('./../services/AuthService');
 const validator     = require('validator');
+const StaffRole     = require('../models').staff_roles;
+const db     = require('../models/index');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -56,7 +58,6 @@ const remove = async function(req, res){
 }
 module.exports.remove = remove;
 
-
 const login = async function(req, res){
     const body = req.body;
     let err, user, staff;
@@ -67,8 +68,15 @@ const login = async function(req, res){
     if(validator.isEmail(email) && domain==CONFIG.staff_email){ 
         [err, staff] = await to(authService.authStaff(body));
         if(err) return ReE(res, err, 422);
-
-        return ReS(res, {token:staff.getJWT(), user:staff.toWeb(),admin:true});
+        [err, role] = await to(StaffRole.find({ where: { staffId: staff.id } ,
+            include: [
+                {
+                  model: db.roles,
+                }
+              ]}));
+        if(err) return ReE(res, err, 422);
+        
+        return ReS(res, {token:staff.getJWT(), user:staff.toWeb(),admin:true,role:role});
     } else{
         [err, user] = await to(authService.authUser(body));
         if(err) return ReE(res, err, 422);

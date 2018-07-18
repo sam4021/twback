@@ -35,6 +35,8 @@ router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {
 router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
 
 router.post(     '/admin/staff/create',       passport.authenticate('jwt', {session:false}), StaffController.create);  
+router.get(     '/admin/staff/get_staff',       passport.authenticate('jwt', {session:false}), StaffController.get_staff);  
+router.get(     '/admin/staff/get_staffs',       passport.authenticate('jwt', {session:false}), StaffController.get_all_staff);  
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

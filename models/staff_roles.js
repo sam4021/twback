@@ -15,5 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         return json;
     };
 
+    
+
     return Model;
 };

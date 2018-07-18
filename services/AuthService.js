@@ -1,6 +1,7 @@
 const User 			= require('./../models').users;
 const Staff 			= require('./../models').staffs;
 const validator     = require('validator');
+const db     = require('../models/index');
 
 const getUniqueKeyFromBody = function(body){// this is so they can send in 3 options unique_key, email, or phone and it will work
     let unique_key = body.unique_key;
@@ -109,14 +110,6 @@ const createStaff = async function(staffInfo){
         
         return staff;
 
-    }else if(validator.isMobilePhone(unique_key, 'any')){//checks if only phone number was sent
-        auth_info.method = 'phone'; 
-        staffInfo.phone = unique_key;
-
-        [err, staff] = await to(Staff.create(staffInfo));
-        if(err) TE('user already exists with that phone number');
-
-        return staff;
     }else{
         TE('A valid email or phone number was not entered.');
     }
@@ -137,7 +130,18 @@ const authStaff = async function(userInfo){
     if(validator.isEmail(unique_key)){
         auth_info.method='email';
 
-        [err, user] = await to(Staff.findOne({where:{email:unique_key}}));
+        [err, user] = await to(Staff.findOne({where:{email:unique_key},
+            include: [
+                {
+                  model: db.staff_roles,
+                  include: [
+                    {
+                      model: db.roles
+                    }
+                  ]
+                }
+              ]
+        }));
         if(err) TE(err.message);
         
     }else{

@@ -4,6 +4,7 @@ const User = require('../models').users;
 const Staff = require('../models').staffs;
 const StaffRoles = require('../models').staff_roles;
 const Roles = require('../models').roles;
+const db     = require('../models/index');
 
 module.exports = function(passport){
     var opts = {};
@@ -15,18 +16,20 @@ module.exports = function(passport){
         console.log(jwt_payload);
         var result = Object.keys(jwt_payload); 
         if (result[0] == 'staff_id') {
-            [err, user] = await to(Staff.findById(jwt_payload.staff_id,{include: [
-                {
-                  model: StaffRoles,
-                  include: [
+            [err, user] = await to(Staff.findById(jwt_payload.staff_id,{attributes: { exclude: ['password'] },
+                include: [
                     {
-                      model: Roles
+                      model: db.staff_roles,
+                      include: [
+                        {
+                          model: db.roles
+                        }
+                      ]
                     }
                   ]
-                }
-              ]}));
+            }));
         } else {
-            [err, user] = await to(User.findById(jwt_payload.user_id));
+            [err, user] = await to(User.findById(jwt_payload.user_id,{attributes: { exclude: ['password'] }}));
         }
 
         if(err) return done(err, false);

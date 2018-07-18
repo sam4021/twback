@@ -38,7 +38,7 @@ password: wandah
 ```
 url | Action 
 --- | ---
-*/users/create* | **POST** 
+*/admin/staff/create* | **POST** 
 
 ###### users
 ```

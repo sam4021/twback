@@ -18,7 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         email     : {type: DataTypes.STRING, unique: true, validate: { isEmail: {msg: "Email is invalid."} }},
         phone     : {type: DataTypes.STRING, unique: true, validate: { len: {args: [7, 20], msg: "Phone number invalid, too short."}, isNumeric: { msg: "not a valid phone number."} }},
         password  : DataTypes.STRING, 
+        staffId     : DataTypes.STRING,
     });
+
+    // Model.associate = function(models){
+    //     this.roles = this.belongsToMany(models.roles, {through: 'staff_roles',foreignKey: 'staffId'});
+    // };
 
     Model.beforeSave(async (user, options) => {
         let err;
