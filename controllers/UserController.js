@@ -4,11 +4,16 @@ const authService   = require('./../services/AuthService');
 const validator     = require('validator');
 const StaffRole     = require('../models').staff_roles;
 const db     = require('../models/index');
+// const transporter = require('../middleware/mailer');
+var directTransport = require('nodemailer-direct-transport');
+var nodemailer = require('nodemailer');
+var options = {};
+var transporter = nodemailer.createTransport(directTransport(options))
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     const body = req.body;    
-
+    
     if(!body.unique_key && !body.email && !body.phone){
         return ReE(res, 'Please enter an email or phone number to register.');
     } else if(!body.password){
@@ -17,8 +22,13 @@ const create = async function(req, res){
         let err, user;
 
         [err, user] = await to(authService.createUser(body));
-
         if(err) return ReE(res, err, 422);
+        transporter.sendMail({
+            from: 'samson@geminia.co.ke',
+            to: "samsonwandah@gmail.com",
+            subject: 'hello',
+            html: 'hello world!'
+        });
         return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
     }
 }
@@ -67,16 +77,8 @@ const login = async function(req, res){
 
     if(validator.isEmail(email) && domain==CONFIG.staff_email){ 
         [err, staff] = await to(authService.authStaff(body));
-        if(err) return ReE(res, err, 422);
-        [err, role] = await to(StaffRole.find({ where: { staffId: staff.id } ,
-            include: [
-                {
-                  model: db.roles,
-                }
-              ]}));
-        if(err) return ReE(res, err, 422);
-        
-        return ReS(res, {token:staff.getJWT(), user:staff.toWeb(),admin:true,role:role});
+        if(err) return ReE(res, err, 422);        
+        return ReS(res, {token:staff.getJWT(), user:staff.toWeb(),admin:true});
     } else{
         [err, user] = await to(authService.authUser(body));
         if(err) return ReE(res, err, 422);

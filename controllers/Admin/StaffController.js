@@ -1,5 +1,6 @@
 const Staff         = require('../../models').staffs;
 const authService   = require('./../../services/AuthService');
+const db     = require('../../models/index');
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -33,6 +34,26 @@ const get_staff = async function(req, res){
     return ReS(res, {user:user.toWeb()});
 }
 module.exports.get_staff = get_staff;
+
+const get_staff_info = async function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    let user = req.user;
+    [err, staff] = await to(Staff.findById(req.params.staff_id,{attributes: { exclude: ['password'] },
+                include: [
+                    {
+                      model: db.staff_roles,
+                      include: [
+                        {
+                          model: db.roles
+                        }
+                      ]
+                    }
+                  ]
+            }));
+
+    return ReS(res, {staff:staff.toWeb()});
+}
+module.exports.get_staff_info = get_staff_info;
 
 const get_all_staff = async function(req, res){
     res.setHeader('Content-Type', 'application/json');

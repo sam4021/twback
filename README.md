@@ -39,6 +39,11 @@ password: wandah
 url | Action 
 --- | ---
 */admin/staff/create* | **POST** 
+*/admin/staff/get_staff* | **GET** 
+*/admin/staff/get_staffs* | **GET** 
+*/admin/staff/get_staff_info/:staff_id* | **GET** 
+*/admin/user/get_users* | **GET** 
+*/admin/user/get_user_info* | **GET** 
 
 ###### users
 ```

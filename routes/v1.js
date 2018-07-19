@@ -9,6 +9,7 @@ const HomeController 	= require('./../controllers/HomeController');
 
 //Admin Contollers
 const StaffController 	= require('./../controllers/Admin/StaffController');
+const UserAController 	= require('./../controllers/Admin/UserController');
 
 const passport      	= require('passport');
 const path              = require('path');
@@ -25,18 +26,22 @@ router.get(     '/users/get',       passport.authenticate('jwt', {session:false}
 router.put(     '/users/update',    passport.authenticate('jwt', {session:false}), UserController.update);     
 router.post(    '/users/login',     UserController.login);
 
-router.post(     '/user_info/create',       passport.authenticate('jwt', {session:false}), UserInfoController.create);  
+router.post(    '/user_info/create',       passport.authenticate('jwt', {session:false}), UserInfoController.create);  
 router.get(     '/user_info/get',       passport.authenticate('jwt', {session:false}), UserInfoController.get);        
 router.put(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);  
 
-router.post(     '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
+router.post(    '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
 router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);       
 router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
 router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
 
-router.post(     '/admin/staff/create',       passport.authenticate('jwt', {session:false}), StaffController.create);  
+router.post(    '/admin/staff/create',       passport.authenticate('jwt', {session:false}), StaffController.create);  
 router.get(     '/admin/staff/get_staff',       passport.authenticate('jwt', {session:false}), StaffController.get_staff);  
 router.get(     '/admin/staff/get_staffs',       passport.authenticate('jwt', {session:false}), StaffController.get_all_staff);  
+router.get(     '/admin/staff/get_staff_info/:staff_id',       passport.authenticate('jwt', {session:false}), StaffController.get_staff_info);  
+
+router.get(     '/admin/user/get_users',       passport.authenticate('jwt', {session:false}), UserAController.get_all_users);
+router.get(     '/admin/user/get_user_info',       passport.authenticate('jwt', {session:false}), UserAController.get_user_info);  
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

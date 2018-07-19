@@ -13,7 +13,6 @@ module.exports = function(passport){
 
     passport.use(new JwtStrategy(opts, async function(jwt_payload, done){
         let err, user;//console.log("Payload::::"+jwt_payload);
-        console.log(jwt_payload);
         var result = Object.keys(jwt_payload); 
         if (result[0] == 'staff_id') {
             [err, user] = await to(Staff.findById(jwt_payload.staff_id,{attributes: { exclude: ['password'] },

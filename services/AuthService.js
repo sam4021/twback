@@ -33,7 +33,8 @@ const createUser = async function(userInfo){
         auth_info.method = 'email';
         userInfo.email = unique_key;
 
-        [err, user] = await to(User.create(userInfo));        
+        [err, user] = await to(User.create(userInfo));       console.log(err);
+         
         if(err) TE('user already exists with that email');
         
         return user;
@@ -57,6 +58,7 @@ const authUser = async function(userInfo){//returns token
     let auth_info = {};
     auth_info.status = 'login';
     unique_key = getUniqueKeyFromBody(userInfo);
+console.log(userInfo);
 
     if(!unique_key) TE('Please enter an email or phone number to login');
 

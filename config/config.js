@@ -19,3 +19,8 @@ CONFIG.db_password  = process.env.DB_PASSWORD   || '45a263cf';
 CONFIG.jwt_encryption  = process.env.JWT_ENCRYPTION || 'jwt_please_change';
 CONFIG.jwt_expiration  = process.env.JWT_EXPIRATION || '10000';
 CONFIG.staff_email  = 'geminia.co.ke';
+
+CONFIG.mail_host= process.env.MAIL_HOST                  || '';
+CONFIG.mail_port= process.env.MAIL_PORT                  || '';
+CONFIG.mail_user= process.env.MAIL_USERNAME              || '';
+CONFIG.mail_pass= process.env.MAIL_PASSWORD              || '';
