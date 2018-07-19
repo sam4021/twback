@@ -1,5 +1,5 @@
 require('../config/config');
-const User          = require('../models').user;
+const User          = require('../models').users;
 const authService   = require('./../services/AuthService');
 const validator     = require('validator');
 const StaffRole     = require('../models').staff_roles;
@@ -37,8 +37,25 @@ module.exports.create = create;
 const get = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let user = req.user;
-
-    return ReS(res, {user:user.toWeb()});
+    [err, userInfo] = await to(User.findById(req.user.id,{attributes: { exclude: ['password'] },
+                include: [
+                    {
+                        model: db.user_info
+                    },
+                    {
+                      model: db.beneficiary,
+                    },
+                    {
+                        model: db.user_policy,
+                        include:[
+                            {
+                                model: db.policies
+                            }
+                        ]
+                    }
+                  ]
+            }));
+    return ReS(res, {user:userInfo.toWeb()});
 }
 module.exports.get = get;
 

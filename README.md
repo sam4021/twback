@@ -17,18 +17,20 @@ https://twback.herokuapp.com/v1
 
 ##### Client:
 
-url | Action 
---- | ---
-*/users/create* | **POST** 
-*/users/login* | **POST** 
-*/users/get* | **GET**
-*/users/update* | **POST**
-*/user_info/get* | **GET**
-*/user_info/create* | **POST**
-*/user_info/update* | **POST**
-*/user_beneficiary/create* | **POST**
-*/user_beneficiary/get* | **GET**
-*/user_beneficiary/update* | **GET**
+url | Action | Desc
+--- | --- | ---
+*/users/create* | **POST** |
+*/users/login* | **POST** |
+*/users/get* | **GET** | Get all user data (beneficiary, policies)
+*/users/update* | **POST** |
+*/user_info/get* | **GET** |
+*/user_info/create* | **POST** |
+*/user_info/update* | **POST** |
+*/user_beneficiary/create* | **POST** |
+*/user_beneficiary/get* | **GET** |
+*/user_beneficiary/update* | **GET** |
+*/policy_years* | **GET** | Get the types of policies
+*/user/create_policy* | **POST** | create a user policy , includes user_id, policy_id 
 
 ##### Admin:
 ```
@@ -113,16 +115,57 @@ GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bea
 Results
 {
     "user": {
-        "id": "xxxx",
-        "first": "xxxx",
-        "middle": "xxx",
+        "id": "xxx",
+        "first": "xxx",
+        "middle": "xx",
         "last": "xxx",
-        "id_number": "xxxx",
-        "email": "xxxx",
+        "id_number": "xx",
+        "email": "xxx@xx.xx",
         "phone": "xx",
-        "password": "xxxx",
-        "createdAt": "2018-07-09T12:24:44.000Z",
-        "updatedAt": "2018-07-09T12:24:44.000Z"
+        "createdAt": "2018-07-11T09:47:34.000Z",
+        "updatedAt": "2018-07-11T09:47:34.000Z",
+        "user_info": {
+            "id": "xxxx",
+            "nationality": "xxx",
+            "date_of_birth": "1-12-20181",
+            "gender": "xx",
+            "branch": "xx",
+            "occupation": "xx",
+            "createdAt": "2018-07-11T09:48:02.000Z",
+            "updatedAt": "2018-07-12T13:49:49.000Z",
+            "userId": "xxxx"
+        },
+        "beneficiary": {
+            "id": "xxx",
+            "first": "xx",
+            "middle": "xx",
+            "last": "xxx",
+            "relation": "xxx",
+            "id_number": "xxx",
+            "email": "xx@xx.xx",
+            "phone": "xxx",
+            "createdAt": "2018-07-12T14:19:04.000Z",
+            "updatedAt": "2018-07-13T00:07:58.000Z",
+            "userId": "xxx"
+        },
+        "user_policies": [
+            {
+                "id": "xxx",
+                "inception_date": "2018-07-11T00:00:00.000Z",
+                "maturity_date": "2018-07-11T00:00:00.000Z",
+                "actual_premium": xxx,
+                "createdAt": "2018-07-19T12:41:39.000Z",
+                "updatedAt": "2018-07-19T12:41:39.000Z",
+                "userId": "xxxx",
+                "policyId": "xxx",
+                "policy": {
+                    "id": "xxx",
+                    "policy_name": "xxxx",
+                    "createdAt": "2018-07-11T09:47:34.000Z",
+                    "updatedAt": "2018-07-11T09:47:34.000Z"
+                }
+            }
+        ]
     },
     "success": true
 }
@@ -270,6 +313,33 @@ Results
 }
 ```
 
+```
+/user/create_policy
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+	"inception_date" : "2018-07-11",
+    "maturity_date"  : "2018-07-11",
+    "actual_premium" : "20000",
+    "userId": "4da04498-1f4e-4eeb-a96c-3f63f3f80d9b",
+    "policyId":1
+}
+Results
+{
+    "message": "Successfully Added Policy.",
+    "user": {
+        "id": "37d23197-4b36-4ace-bbe2-32ac88e6be98",
+        "inception_date": "2018-07-11T00:00:00.000Z",
+        "maturity_date": "2018-07-11T00:00:00.000Z",
+        "actual_premium": "20000",
+        "userId": "4da04498-1f4e-4eeb-a96c-3f63f3f80d9b",
+        "policyId": 1,
+        "updatedAt": "2018-07-19T12:41:39.051Z",
+        "createdAt": "2018-07-19T12:41:39.051Z"
+    },
+    "success": true
+}
+```
 80%
 webservice 
 two weeks
@@ -290,3 +360,23 @@ transactions Model
 :transaction_code
 :name
 :date
+
+
+
+
+CalsulaTOR
+variables:
+-age (18-80):a
+-term (3,4,5):t
+-mode of investment ():mi
+-investment amount, (input):ia
+-last expense amount (100,000):lea
+-last expense anual premium (900):leap
+
+-Total INvestment Fund Contributed:tifc
+-Total Investment Return Earned:tire
+-Total Funds at maturity:tfat
+-Return for Client:rfc
+
+tfat=(tifc+tire)-leap*t
+rfc = tfat/tifc-1
