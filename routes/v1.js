@@ -43,6 +43,7 @@ router.post(    '/admin/staff/create',       passport.authenticate('jwt', {sessi
 router.get(     '/admin/staff/get_staff',       passport.authenticate('jwt', {session:false}), StaffController.get_staff);  
 router.get(     '/admin/staff/get_staffs',       passport.authenticate('jwt', {session:false}), StaffController.get_all_staff);  
 router.get(     '/admin/staff/get_staff_info/:staff_id',       passport.authenticate('jwt', {session:false}), StaffController.get_staff_info);  
+router.put(     '/admin/staff/update/:staff_id',       passport.authenticate('jwt', {session:false}), StaffController.update);  
 
 router.get(     '/admin/user/get_users',       passport.authenticate('jwt', {session:false}), UserAController.get_all_users);
 router.get(     '/admin/user/get_user_info',       passport.authenticate('jwt', {session:false}), UserAController.get_user_info);  

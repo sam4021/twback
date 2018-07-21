@@ -38,14 +38,15 @@ admin login test:
 email: sam@geminia.co.ke
 password: wandah
 ```
-url | Action 
---- | ---
-*/admin/staff/create* | **POST** 
-*/admin/staff/get_staff* | **GET** 
-*/admin/staff/get_staffs* | **GET** 
-*/admin/staff/get_staff_info/:staff_id* | **GET** 
-*/admin/user/get_users* | **GET** 
-*/admin/user/get_user_info* | **GET** 
+url | Action | Desc
+--- | --- | ---
+*/admin/staff/create* | **POST** |
+*/admin/staff/get_staff* | **GET** | 
+*/admin/staff/get_staffs* | **GET**  |
+*/admin/staff/get_staff_info/:staff_id* | **GET** |
+*/admin/user/get_users* | **GET** |
+*/admin/user/get_user_info* | **GET** |
+*/admin/staff/update/:staff_id* | **PUT** |
 
 ###### users
 ```

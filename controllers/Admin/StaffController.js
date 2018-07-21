@@ -66,27 +66,13 @@ const get_all_staff = async function(req, res){
 module.exports.get_all_staff = get_all_staff;
 
 const update = async function(req, res){
-    let err, user, data
+    let err, user, data;
     user = req.user;
     data = req.body;
-    user.set(data);
 
-    [err, user] = await to(user.save());
-    if(err){
-        if(err.message=='Validation error') err = 'The email address or phone number is already in use';
-        return ReE(res, err);
-    }
-    return ReS(res, {message :'Updated User: '+user.email});
+    [err, staff] = await to(Staff.update(data, {where: { id: req.params.staff_id } }));
+    if(err)ReE(res, err);
+
+    return ReS(res, {message :"Staff Info Updated "});
 }
 module.exports.update = update;
-
-const remove = async function(req, res){
-    let user, err;
-    user = req.user;
-
-    [err, user] = await to(user.destroy());
-    if(err) return ReE(res, 'error occured trying to delete user');
-
-    return ReS(res, {message:'Deleted User'}, 204);
-}
-module.exports.remove = remove;
