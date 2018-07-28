@@ -47,6 +47,7 @@ router.put(     '/admin/staff/update/:staff_id',       passport.authenticate('jw
 
 router.get(     '/admin/user/get_users',       passport.authenticate('jwt', {session:false}), UserAController.get_all_users);
 router.get(     '/admin/user/get_user_info',       passport.authenticate('jwt', {session:false}), UserAController.get_user_info);  
+router.get(     '/admin/get_all_policies',       passport.authenticate('jwt', {session:false}), PolicyController.getUserPolicies);  
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 

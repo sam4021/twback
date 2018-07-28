@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-    var Model = sequelize.define('user_policy', {
+    var Model = sequelize.define('user_policies', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,

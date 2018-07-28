@@ -53,6 +53,7 @@ db.users.hasOne(db.beneficiary);
 db.users.hasMany(db.notifications);  
 db.policies.hasMany(db.user_policy);
 db.user_policy.belongsTo(db.policies);
+db.user_policy.belongsTo(db.users);
 db.users.hasMany(db.transactions);
 db.policies.hasMany(db.transactions);  
 db.staffs.hasMany(db.staff_roles);

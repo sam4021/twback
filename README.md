@@ -40,13 +40,14 @@ password: wandah
 ```
 url | Action | Desc
 --- | --- | ---
-*/admin/staff/create* | **POST** |
-*/admin/staff/get_staff* | **GET** | 
-*/admin/staff/get_staffs* | **GET**  |
-*/admin/staff/get_staff_info/:staff_id* | **GET** |
-*/admin/user/get_users* | **GET** |
-*/admin/user/get_user_info* | **GET** |
-*/admin/staff/update/:staff_id* | **PUT** |
+*/admin/staff/create* | **POST** | Create a new Staff
+*/admin/staff/get_staff* | **GET** | Get Logged in staff data 
+*/admin/staff/get_staffs* | **GET**  | Get All the Staffs info
+*/admin/staff/get_staff_info/:staff_id* | **GET** | Get Single Staff Info
+*/admin/user/get_users* | **GET** | Get Users
+*/admin/user/get_user_info/:user_id* | **GET** | Get Single User Info
+*/admin/staff/update/:staff_id* | **PUT** | Update Staff Info From Super Admin
+*/admin/get_all_policies* | **GET** | Get All the Policises
 
 ###### users
 ```
@@ -341,6 +342,47 @@ Results
     "success": true
 }
 ```
+
+```
+/admin/get_all_policies
+GETT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+Results
+{
+    "policy": [
+        {
+            "id": "b5969dd6-1ef0-4dd1-a46a-636f60b72ed2",
+            "inception_date": "2018-07-11T00:00:00.000Z",
+            "maturity_date": "2018-07-11T00:00:00.000Z",
+            "actual_premium": xxx,
+            "createdAt": "2018-07-28T09:08:00.000Z",
+            "updatedAt": "2018-07-28T09:08:00.000Z",
+            "userId": "xxxxx",
+            "policyId": "xxxxx",
+            "user": {
+                "id": "xxx",
+                "first": "xxx",
+                "middle": "xxxx",
+                "last": "xxx",
+                "id_number": "xxx",
+                "email": "xxx@xxx.xxx",
+                "phone": "xxx",
+                "createdAt": "2018-07-12T11:31:13.000Z",
+                "updatedAt": "2018-07-12T11:31:13.000Z"
+            },
+            "policy": {
+                "id": "xxx",
+                "policy_name": "xxxx",
+                "createdAt": "2018-07-11T09:47:34.000Z",
+                "updatedAt": "2018-07-11T09:47:34.000Z"
+            }
+        }
+    ],
+    "success": true
+}
+```
+
+
 80%
 webservice 
 two weeks

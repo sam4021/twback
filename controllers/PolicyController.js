@@ -13,12 +13,13 @@ const get = async function(req, res){
     return ReS(res, {policy:policy});
 }
 module.exports.get = get;
-
+ 
 const create_policy = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let err ;
     const body = req.body; 
     let user = req.user;
+    body['userId'] = user.id;
 
     [err, policy] = await to(UserPolicy.create(body));
     if(err) return ReE(res, err, 422);
@@ -27,3 +28,23 @@ const create_policy = async function(req, res){
     
 }
 module.exports.create_policy = create_policy;
+
+const getUserPolicies = async function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    let err, policy;
+    [err, policy] = await to(UserPolicy.findAll({
+        include: [
+            {
+              model: db.users,
+              attributes: { exclude: ['password'] }
+            },
+            {
+                model: db.policies
+            }
+          ]
+    }));    
+    if(err) TE(err.message);
+
+    return ReS(res, {policy:policy});
+}
+module.exports.getUserPolicies = getUserPolicies;
