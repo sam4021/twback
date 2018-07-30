@@ -1,3 +1,49 @@
+#####Next meeting wednesday
+#####CHANGES
+```
+-- add bank info on profile (acc no, acc name, branch, )
+-- add a prompt if one does not have a bank info filled and he tries to do withdrawal.   
+-- add prefilled on gender and branches 
+-- on policy assign beneficiary to policy
+-- take client to transactions after creatin a policy
+-- give client notifications on all created policy that no action has taken place on them
+-- assign to admin to move cash 
+-- include bulk notifications platform on admin
+-- base graph colors on maturity, red if not , green if mature  with a tick .
+-- pop up on with withdrawal info
+-- note payment of cash is done after 3-4 days of request, a client to get notification ion day     of cash is deposited.
+-- if policy is mature and client has not withdrawn, get a weekly twice and then  therest of notifications to be monthly notification (sms, email)
+-- a client will get a 6% deduction before the policy matures.
+--pop up info when clicked, shows sumarrived @ 6%
+-- beneficiary is only linked to life policy not cash
+-- add frequency of payment on policy setup, ie weekly , mothly ie get a notification every frequency chosen
+-- include tawk on page.
+-- view as pdf, download, print, email.
+-- if a client stays too long in unactive page is logged out.
+-- questions on time of log in for security.
+-- 
+
+#Deliverables USER
+-- sign up
+-- sign in
+-- fill more info/beneficieries/bank info
+-- create a policy.
+-- dummy for transaction placed
+-- 
+
+#Deliverables ADMIN
+-- Admin and super Admin Dashboards
+
+-- registration
+-- policy setup
+-- policy payment
+-- viewing policy
+-- viewing transactions 
+-- viewing progress of graphs
+-- withdrawals
+--
+
+```
 ##### Routing : Express
 ##### ORM Database : Sequelize
 ##### Authentication : Passport, JWT
