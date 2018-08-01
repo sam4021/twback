@@ -200,6 +200,15 @@ Results
             "updatedAt": "2018-07-13T00:07:58.000Z",
             "userId": "xxx"
         },
+        "user_bank": {
+            "id": "xxxx",
+            "name": "bank kuu",
+            "number": "123456789",
+            "branch": "kimathi",
+            "createdAt": "2018-08-01T11:44:47.000Z",
+            "updatedAt": "2018-08-01T11:44:47.000Z",
+            "userId": "xxxxxx"
+        },
         "user_policies": [
             {
                 "id": "xxx",
@@ -283,6 +292,67 @@ POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Be
 Results
 {
     "message": "User Info Update ",
+    "success": true
+}
+```
+
+###### Users Bank Info
+```
+/user_bank/create
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"name"     : "xxx",
+    "number"    : "xxx",
+    "branch"      : "xxx"
+}
+
+Results
+{
+    "message": "Successfully Added User Bank.",
+    "user": {
+        "id": "xxx",
+        "name": "xxx",
+        "number": "xxx",
+        "branch": "xxx",
+        "userId": "xxx",
+        "updatedAt": "2018-07-12T14:19:04.622Z",
+        "createdAt": "2018-07-12T14:19:04.622Z"
+    },
+    "success": true
+}
+```
+
+```
+/user_bank/get
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+Results
+{
+    "user": {
+        "id": "xxxxx",
+        "name": "xx",
+        "number": "xx",
+        "branch": "xx"
+        "createdAt": "2018-07-12T14:19:04.000Z",
+        "updatedAt": "2018-07-12T14:19:04.000Z",
+        "userId": "xxxx"
+    },
+    "success": true
+}
+```
+```
+/user_bank/update
+PUT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+	"name"     : "xxx",
+    "number"    : "xxx",
+    "branch"      : "xxx"
+}
+
+Results
+{
+    "message": "User Bank Update ",
     "success": true
 }
 ```

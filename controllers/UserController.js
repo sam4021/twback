@@ -43,7 +43,10 @@ const get = async function(req, res){
                         model: db.user_info
                     },
                     {
-                      model: db.beneficiary,
+                        model: db.beneficiary,
+                    },
+                    {
+                        model:db.user_bank
                     },
                     {
                         model: db.user_policy,

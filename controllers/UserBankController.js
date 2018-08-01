@@ -38,7 +38,7 @@ const update = async function(req, res){
       })
       .then(u => {
         u.updateAttributes(data);
-        return ReS(res, {message :"User Info Update "});
+        return ReS(res, {message :"User Bank Info Update "});
       });
 }
 module.exports.update = update;
