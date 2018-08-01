@@ -1,3 +1,8 @@
+*Hey Guys,*
+*So we Need to have a complete process flow of the system, with a dummy account for mpesa and have maturity*
+
+*Lets Do this LEO*
+
 #####Next meeting wednesday
 
 #####CHANGES
