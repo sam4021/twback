@@ -8,7 +8,8 @@ const db     = require('../models/index');
 
 module.exports = function(passport){
     var opts = {};
-    opts.jwtFromRequest = ExtractJwt.fromHeader("authorization");//ExtractJwt.fromAuthHeaderAsBearerToken();
+    opts.jwtFromRequest = ExtractJwt.fromHeader("authorization");
+    //opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     opts.secretOrKey = CONFIG.jwt_encryption;
 
     passport.use(new JwtStrategy(opts, async function(jwt_payload, done){
@@ -16,7 +17,7 @@ module.exports = function(passport){
         var result = Object.keys(jwt_payload); 
         if (result[0] == 'staff_id') {
             [err, user] = await to(Staff.findById(jwt_payload.staff_id,{attributes: { exclude: ['password'] },
-                include: [
+                include: [ 
                     {
                       model: db.staff_roles,
                       include: [

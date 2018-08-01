@@ -4,6 +4,7 @@ const router 			= express.Router();
 //User Controllers
 const UserController 	= require('./../controllers/UserController');
 const UserInfoController 	= require('./../controllers/UserInfoController');
+const UserBankController 	= require('./../controllers/UserBankController');
 const BeneficiaryController 	= require('./../controllers/BeneficiaryController');
 const HomeController 	= require('./../controllers/HomeController');
 const PolicyController 	= require('./../controllers/PolicyController');
@@ -30,6 +31,10 @@ router.post(    '/users/login',     UserController.login);
 router.post(    '/user_info/create',       passport.authenticate('jwt', {session:false}), UserInfoController.create);  
 router.get(     '/user_info/get',       passport.authenticate('jwt', {session:false}), UserInfoController.get);        
 router.put(     '/user_info/update',       passport.authenticate('jwt', {session:false}), UserInfoController.update);  
+
+router.post(    '/user_bank/create',       passport.authenticate('jwt', {session:false}), UserBankController.create);  
+router.get(     '/user_bank/get',       passport.authenticate('jwt', {session:false}), UserBankController.get);        
+router.put(     '/user_bank/update',       passport.authenticate('jwt', {session:false}), UserBankController.update);  
 
 router.post(    '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
 router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);       

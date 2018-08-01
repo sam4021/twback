@@ -69,13 +69,16 @@ url | Action | Desc
 */users/create* | **POST** |
 */users/login* | **POST** |
 */users/get* | **GET** | Get all user data (beneficiary, policies)
-*/users/update* | **POST** |
+*/users/update* | **PUT** |
 */user_info/get* | **GET** |
 */user_info/create* | **POST** |
-*/user_info/update* | **POST** |
+*/user_info/update* | **PUT** |
 */user_beneficiary/create* | **POST** |
 */user_beneficiary/get* | **GET** |
-*/user_beneficiary/update* | **GET** |
+*/user_beneficiary/update* | **PUT** |
+*/user_bank/create* | **POST** |
+*/user_bank/get* | **GET** |
+*/user_bank/update* | **PUT** |
 */policy_years* | **GET** | Get the types of policies
 */user/create_policy* | **POST** | create a user policy , includes user_id, policy_id 
 
