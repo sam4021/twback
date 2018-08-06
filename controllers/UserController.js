@@ -38,16 +38,16 @@ const get = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let user = req.user;
     [err, userInfo] = await to(User.findById(req.user.id,{attributes: { exclude: ['password'] },
-                include: [
+                 include: [
                     {
                         model: db.user_info
                     },
                     {
                         model: db.beneficiary,
                     },
-                    {
-                        model:db.user_bank
-                    },
+                    // {
+                    //     model:db.user_bank
+                    // },
                     {
                         model: db.user_policy,
                         include:[
@@ -56,7 +56,7 @@ const get = async function(req, res){
                             }
                         ]
                     }
-                  ]
+                   ]
             }));
     return ReS(res, {user:userInfo.toWeb()});
 }

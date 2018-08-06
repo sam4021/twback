@@ -31,7 +31,7 @@
 
 #Deliverables USER
 -- sign up
--- sign in
+-- sign in  
 -- fill more info/beneficieries/bank info
 -- create a policy.
 -- dummy for transaction placed
