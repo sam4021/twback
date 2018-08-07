@@ -3,6 +3,7 @@ const User          = require('../../models').users;
 const authService   = require('./../../services/AuthService');
 const validator     = require('validator');
 const StaffRole     = require('../../models').staff_roles;
+const WithdrawalResponse         = require('../../models').user_policy_withdrawal_response;
 const db     = require('../../models/index');
 // const transporter = require('../middleware/mailer');
 var directTransport = require('nodemailer-direct-transport');
@@ -58,3 +59,16 @@ const get_user_info = async function(req, res){
     return ReS(res, {user:user});
 }
 module.exports.get_user_info = get_user_info;
+
+const withdrawal_response = async function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    let err ;
+    const body = req.body; 
+    body['staffId'] = req.params.staff_id;
+
+    [err, policy] = await to(WithdrawalResponse.create(body));
+    if(err) return ReE(res, err, 422);
+
+    return ReS(res, {message:'Successfully Policy Withdrawal Approved.', withdrawal:policy.toWeb()}, 201);
+}
+module.exports.withdrawal_response = withdrawal_response;

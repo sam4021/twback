@@ -7,47 +7,50 @@
 
 #####CHANGES
 ```
--- add bank info on profile (acc no, acc name, branch, )
--- add a prompt if one does not have a bank info filled and he tries to do withdrawal.   
--- add prefilled on gender and branches 
--- on policy assign beneficiary to policy
--- take client to transactions after creatin a policy
--- give client notifications on all created policy that no action has taken place on them
--- assign to admin to move cash 
--- include bulk notifications platform on admin
--- base graph colors on maturity, red if not , green if mature  with a tick .
--- pop up on with withdrawal info
--- note payment of cash is done after 3-4 days of request, a client to get notification ion day     of cash is deposited.
--- if policy is mature and client has not withdrawn, get a weekly twice and then  therest of notifications to be monthly notification (sms, email)
--- a client will get a 6% deduction before the policy matures.
---pop up info when clicked, shows sumarrived @ 6%
--- beneficiary is only linked to life policy not cash
--- add frequency of payment on policy setup, ie weekly , mothly ie get a notification every frequency chosen
--- include tawk on page.
--- view as pdf, download, print, email.
--- if a client stays too long in unactive page is logged out.
--- questions on time of log in for security.
--- 
+- [x] add bank info on profile (acc no, acc name, branch, )
+- [ ] add a prompt if one does not have a bank info filled and he tries to do withdrawal.   
+- [ ] add prefilled on gender and branches 
+- [ ] on policy assign beneficiary to policy
+- [ ] take client to transactions after creatin a policy
+- [ ] give client notifications on all created policy that no action has taken place on them
+- [ ] assign to admin to move cash 
+- [ ] include bulk notifications platform on admin
+- [ ] base graph colors on maturity, red if not , green if mature  with a tick .
+- [ ] pop up on with withdrawal info
+- [ ] note payment of cash is done after 3-4 days of request, a client to get notification ion day     of cash is deposited.
+- [ ] if policy is mature and client has not withdrawn, get a weekly twice and then  therest of notifications to be monthly notification (sms, email)
+- [ ] a client will get a 6% deduction before the policy matures.
+- [ ] pop up info when clicked, shows sumarrived @ 6%
+- [x] beneficiary is only linked to life policy not cash
+- [ ] add frequency of payment on policy setup, ie weekly , mothly ie get a notification every frequency chosen
+- [ ] include tawk on page.
+- [ ] view as pdf, download, print, email.
+- [ ] if a client stays too long in unactive page is logged out.
+- [ ] questions on time of log in for security.
 
+```
 #Deliverables USER
--- sign up
--- sign in  
--- fill more info/beneficieries/bank info
--- create a policy.
--- dummy for transaction placed
--- 
-
+```
+- sign up
+- sign in  
+- fill more info/beneficieries/bank info
+- create a policy.
+- dummy for transaction placed
+```
 #Deliverables ADMIN
--- Admin and super Admin Dashboards
+```
+- Admin and super Admin Dashboards
 
--- registration
--- policy setup
--- policy payment
--- viewing policy
--- viewing transactions 
--- viewing progress of graphs
--- withdrawals
---
+- registration
+- policy setup
+- policy payment
+- viewing policy
+- viewing transactions 
+- viewing progress of graphs
+- withdrawals
+- cluster maturity by dates 
+
+-
 
 ```
 ##### Routing : Express
@@ -86,6 +89,7 @@ url | Action | Desc
 */user_bank/update* | **PUT** |
 */policy_years* | **GET** | Get the types of policies
 */user/create_policy* | **POST** | create a user policy , includes user_id, policy_id 
+*/user/policy_withdrawal_request* | **POST** | Client Request for a policy Withdrawal (amount is all money saved)
 
 ##### Admin:
 ```
@@ -101,6 +105,7 @@ url | Action | Desc
 */admin/staff/get_staff_info/:staff_id* | **GET** | Get Single Staff Info
 */admin/user/get_users* | **GET** | Get Users
 */admin/user/get_user_info/:user_id* | **GET** | Get Single User Info
+*/admin/user/withdrawal_response/:user_id* | **POST** | Set User Aproval of withdrawal
 */admin/staff/update/:staff_id* | **PUT** | Update Staff Info From Super Admin
 */admin/get_all_policies* | **GET** | Get All the Policises
 
@@ -470,7 +475,7 @@ Results
 
 ```
 /admin/get_all_policies
-GETT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
 
 Results
 {
@@ -503,6 +508,53 @@ Results
             }
         }
     ],
+    "success": true
+}
+```
+
+```
+/user/policy_withdrawal_request
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"userPolicyId":"xxxx",
+	"amount":"xxx"
+}
+Results
+{
+    "message": "Successfully Policy Withdrawal Accepted.",
+    "withdrawal": {
+        "id": "xxxx",
+        "userPolicyId": "xxxx",
+        "amount": "xxxxxx",
+        "updatedAt": "2018-08-07T12:57:59.810Z",
+        "createdAt": "2018-08-07T12:57:59.810Z"
+    },
+    "success": true
+}
+```
+
+```
+/admin/user/withdrawal_response/:user_id
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"userPolicyId":"xxxx",
+	"amount":"xxxx",
+    "mode_of_pay":"xxxxx",
+    "transaction_id":"xxxxx"
+}
+Results
+{
+    "message": "Successfully Policy Withdrawal Approved.",
+    "withdrawal": {
+        "id": "xxxx",
+        "status": "xxxx",
+        "userPolicyId": "xxxx",
+        "amount": "xxxxxx",
+        "mode_of_pay":"xxxxx",
+        "transaction_id":"xxxxx",
+        "updatedAt": "2018-08-07T12:57:59.810Z",
+        "createdAt": "2018-08-07T12:57:59.810Z"
+    },
     "success": true
 }
 ```

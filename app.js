@@ -4,6 +4,7 @@ require('./global_functions');  //instantiate global functions
 console.log("Environment:", CONFIG.app)
 
 const express 		= require('express');
+const cron = require("node-cron");
 const logger 	    = require('morgan');
 const bodyParser 	= require('body-parser');
 const passport      = require('passport');
@@ -11,6 +12,17 @@ const passport      = require('passport');
 const v1 = require('./routes/v1');
 
 const app = express();
+
+//Cron Job To Run Every Day At 8:00 AM Daily
+cron.schedule("0 8 * * *", function() {
+    console.log("---------------------");
+    console.log(getDateTime());
+    console.log("Running Cron Job @ 11 43");
+    // fs.unlink("./error.log", err => {
+    //   if (err) throw err;
+    //   console.log("Error file succesfully deleted");
+    // });
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

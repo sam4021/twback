@@ -43,6 +43,7 @@ router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {
 
 router.get(     '/policy_years',       passport.authenticate('jwt', {session:false}), PolicyController.get);    
 router.post(     '/user/create_policy',       passport.authenticate('jwt', {session:false}), PolicyController.create_policy);    
+router.post(     '/user/policy_withdrawal_request',       passport.authenticate('jwt', {session:false}), PolicyController.policy_withdrawal_request);    
 
 router.post(    '/admin/staff/create',       passport.authenticate('jwt', {session:false}), StaffController.create);  
 router.get(     '/admin/staff/get_staff',       passport.authenticate('jwt', {session:false}), StaffController.get_staff);  
@@ -51,8 +52,9 @@ router.get(     '/admin/staff/get_staff_info/:staff_id',       passport.authenti
 router.put(     '/admin/staff/update/:staff_id',       passport.authenticate('jwt', {session:false}), StaffController.update);  
 
 router.get(     '/admin/user/get_users',       passport.authenticate('jwt', {session:false}), UserAController.get_all_users);
-router.get(     '/admin/user/get_user_info',       passport.authenticate('jwt', {session:false}), UserAController.get_user_info);  
+router.get(     '/admin/user/get_user_info/:user_id',       passport.authenticate('jwt', {session:false}), UserAController.get_user_info);  
 router.get(     '/admin/get_all_policies',       passport.authenticate('jwt', {session:false}), PolicyController.getUserPolicies);  
+router.post(   '/admin/user/withdrawal_response/:user_id',       passport.authenticate('jwt', {session:false}), UserAController.withdrawal_response);  
 
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 
