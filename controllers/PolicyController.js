@@ -3,6 +3,7 @@ const UserPolicy         = require('../models').user_policy;
 const WithdrawalRequest         = require('../models').user_policy_withdrawal_request;
 const WithdrawalResponse         = require('../models').user_policy_withdrawal_response;
 const db     = require('../models/index');
+const date = new Date();
 
 const get = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -19,14 +20,23 @@ module.exports.get = get;
 const create_policy = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let err ;
+    let day, month, year;
+    day = date.getDay();
+    month = date.getMonth();
+    year = date.getFullYear();
     const body = req.body; 
     let user = req.user;
     body['userId'] = user.id;
+    body['inception_date'] = day+'-'+month+'-'+year;
+     
+    Policies.findById(body['policyId'])
+    .then(async p => {
+        let newYear = Number(year)+Number(p.years);
+        body['maturity_date'] = day+'-'+month+'-'+ newYear;
+       [err, policy] = await to(UserPolicy.create(body));
 
-    [err, policy] = await to(UserPolicy.create(body));
-    if(err) return ReE(res, err, 422);
-
-    return ReS(res, {message:'Successfully Added Policy.', user:policy.toWeb()}, 201);
+        return ReS(res, {message:'Successfully Added Policy.', user:policy.toWeb()}, 201);
+      });    
     
 }
 module.exports.create_policy = create_policy;

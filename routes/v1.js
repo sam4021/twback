@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post(    '/users/create',    UserController.create);                                                 
-router.get(     '/users/get',       passport.authenticate('jwt', {session:false}), UserController.get);        
+router.get(     '/users/get',       passport.authenticate('jwt', {session:false}),UserController.get);        
 router.put(     '/users/update',    passport.authenticate('jwt', {session:false}), UserController.update);     
 router.post(    '/users/login',     UserController.login);
 

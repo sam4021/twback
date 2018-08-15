@@ -3,6 +3,8 @@
 
 *Lets Do this LEO*
 
+auth false
+
 #####Next meeting wednesday
 
 #####CHANGES
@@ -472,7 +474,6 @@ Results
     "success": true
 }
 ```
-
 ```
 /admin/get_all_policies
 GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
@@ -532,12 +533,12 @@ Results
     "success": true
 }
 ```
-
 ```
 /admin/user/withdrawal_response/:user_id
 POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
 {
-	"userPolicyId":"xxxx",
+	"status":"xxxx",
+    "userPolicyId":"xxxx",
 	"amount":"xxxx",
     "mode_of_pay":"xxxxx",
     "transaction_id":"xxxxx"

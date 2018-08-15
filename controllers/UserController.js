@@ -107,3 +107,13 @@ const login = async function(req, res){
     }
 }
 module.exports.login = login;
+
+const logout = async function(req, res){
+    req.logout();
+    console.log("logged off");
+    console.log(req);
+    
+    
+
+}
+module.exports.logout = logout;

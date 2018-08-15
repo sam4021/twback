@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
-        policy_name     : DataTypes.STRING
+        policy_name     : DataTypes.STRING,
+        years : DataTypes.INTEGER
     });
 
     Model.prototype.toWeb = function (pw) {

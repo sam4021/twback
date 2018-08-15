@@ -32,7 +32,7 @@ module.exports = function(passport){
             [err, user] = await to(User.findById(jwt_payload.user_id,{attributes: { exclude: ['password'] }}));
         }
 
-        if(err) return done(err, false);
+        if(err) return done(err, false);        
         if(user) {
             return done(null, user);
         }else{
