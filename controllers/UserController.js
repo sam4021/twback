@@ -1,5 +1,6 @@
 require('../config/config');
 const User          = require('../models').users;
+const Password          = require('../models').passwords;
 const authService   = require('./../services/AuthService');
 const validator     = require('validator');
 const StaffRole     = require('../models').staff_roles;
@@ -23,12 +24,16 @@ const create = async function(req, res){
 
         [err, user] = await to(authService.createUser(body));
         if(err) return ReE(res, err, 422);
-        transporter.sendMail({
-            from: 'samson@geminia.co.ke',
-            to: "samsonwandah@gmail.com",
-            subject: 'hello',
-            html: 'hello world!'
-        });
+        // transporter.sendMail({
+        //     from: 'samson@geminia.co.ke',
+        //     to: "samsonwandah@gmail.com",
+        //     subject: 'hello',
+        //     html: 'hello world!'
+        // });
+        User.findOne({ where: {email: body.email} }).then(result => {
+            console.log(result.id);
+            Password.create({password:body.password,userId:result.id});
+          })
         return ReS(res, {message:'Successfully created new user.', user:user.toWeb(), token:user.getJWT()}, 201);
     }
 }
@@ -43,21 +48,26 @@ const get = async function(req, res){
                         model: db.user_info
                     },
                     {
-                        model: db.beneficiary,
+                        model: db.user_beneficiary
                     },
-                    // {
-                    //     model:db.user_bank
-                    // },
                     {
-                        model: db.user_policy,
-                        include:[
-                            {
-                                model: db.policies
-                            }
-                        ]
-                    }
+                        model: db.user_kin
+                    },
+                    {
+                        model:db.user_bank
+                    },
+                     {
+                         model: db.user_policy,
+                         include:[
+                             {
+                                 model: db.policies
+                             }
+                         ]
+                     }
                    ]
             }));
+            console.log(err);
+            
     return ReS(res, {user:userInfo.toWeb()});
 }
 module.exports.get = get;

@@ -1,4 +1,5 @@
 const User 			= require('./../models').users;
+const Password 			= require('./../models').pa;
 const Staff 			= require('./../models').staffs;
 const validator     = require('validator');
 const db     = require('../models/index');
@@ -33,7 +34,8 @@ const createUser = async function(userInfo){
         auth_info.method = 'email';
         userInfo.email = unique_key;
 
-        [err, user] = await to(User.create(userInfo));       console.log(err);
+        [err, user] = await to(User.create(userInfo)); 
+         console.log(err);
          
         if(err) TE('user already exists with that email');
         
@@ -44,6 +46,8 @@ const createUser = async function(userInfo){
         userInfo.phone = unique_key;
 
         [err, user] = await to(User.create(userInfo));
+        
+        
         if(err) TE('user already exists with that phone number');
 
         return user;
@@ -58,10 +62,8 @@ const authUser = async function(userInfo){//returns token
     let auth_info = {};
     auth_info.status = 'login';
     unique_key = getUniqueKeyFromBody(userInfo);
-console.log(userInfo);
 
     if(!unique_key) TE('Please enter an email or phone number to login');
-
 
     if(!userInfo.password) TE('Please enter a password to login');
 
@@ -83,6 +85,7 @@ console.log(userInfo);
     }
 
     if(!user) TE('Not registered');
+    console.log(userInfo);
 
     [err, user] = await to(user.comparePassword(userInfo.password));
 

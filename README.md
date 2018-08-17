@@ -86,6 +86,9 @@ url | Action | Desc
 */user_beneficiary/create* | **POST** |
 */user_beneficiary/get* | **GET** |
 */user_beneficiary/update* | **PUT** |
+*/user_kin/create* | **POST** |
+*/user_kin/get* | **GET** |
+*/user_kin/update* | **PUT** |
 */user_bank/create* | **POST** |
 */user_bank/get* | **GET** |
 */user_bank/update* | **PUT** |
@@ -365,6 +368,83 @@ PUT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bea
 Results
 {
     "message": "User Bank Update ",
+    "success": true
+}
+```
+###### Users Kin Info
+
+```
+/user_kin/create
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"first"     : "xxx",
+    "middle"    : "xxx",
+    "last"      : "xxx",
+    "relation"  : "xxx",
+    "id_number" : "xxx",
+    "email"     : "xxx@xxx.xxx",
+    "phone" 	: "xxx"
+}
+
+Results
+{
+    "message": "Successfully Added User Kin.",
+    "user": {
+        "id": "xxx",
+        "first": "xxx",
+        "middle": "xxx",
+        "last": "xxx",
+        "relation": "xxx",
+        "id_number": "xxx",
+        "email": "xxx@xxx.xxx",
+        "phone": "xxx",
+        "userId": "xxx",
+        "updatedAt": "2018-07-12T14:19:04.622Z",
+        "createdAt": "2018-07-12T14:19:04.622Z"
+    },
+    "success": true
+}
+```
+
+```
+/user_kin/get
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+Results
+{
+    "user": {
+        "id": "xxxxx",
+        "first": "xx",
+        "middle": "xx",
+        "last": "xx",
+        "relation": "xx",
+        "id_number": "xx",
+        "email": "xx@xx.xx",
+        "phone": "xx",
+        "createdAt": "2018-07-12T14:19:04.000Z",
+        "updatedAt": "2018-07-12T14:19:04.000Z",
+        "userId": "xxxx"
+    },
+    "success": true
+}
+```
+```
+/user_kin/update
+PUT :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+	"first"     : "xxx",
+    "middle"    : "xxx",
+    "last"      : "xxx",
+    "relation"  : "xxx",
+    "id_number" : "xxx",
+    "email"     : "xxx@xxx.xxx",
+    "phone" 	: "xxx"
+}
+
+Results
+{
+    "message": "User Kin Update ",
     "success": true
 }
 ```

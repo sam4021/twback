@@ -1,4 +1,4 @@
-const Beneficiary          = require('../models').beneficiary;
+const Beneficiary          = require('../models').user_beneficiary;
 const User          = require('../models').user;
 
 const create = async function(req, res){

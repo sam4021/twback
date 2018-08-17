@@ -2,7 +2,7 @@
 const jwt           	= require('jsonwebtoken');
 
 module.exports = (sequelize, DataTypes) => {
-    var Model = sequelize.define('beneficiary', {
+    var Model = sequelize.define('user_beneficiary', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,

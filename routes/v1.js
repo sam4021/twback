@@ -38,8 +38,11 @@ router.put(     '/user_bank/update',       passport.authenticate('jwt', {session
 
 router.post(    '/user_beneficiary/create',       passport.authenticate('jwt', {session:false}), BeneficiaryController.create); 
 router.get(     '/user_beneficiary/get',       passport.authenticate('jwt', {session:false}), BeneficiaryController.get);       
-router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
-router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);    
+router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {session:false}), BeneficiaryController.update);
+
+router.post(    '/user_kin/create',       passport.authenticate('jwt', {session:false}), UserInfoController.createKin); 
+router.get(     '/user_kin/get',       passport.authenticate('jwt', {session:false}), UserInfoController.getKin);       
+router.put(     '/user_kin/update',       passport.authenticate('jwt', {session:false}), UserInfoController.updateKin);
 
 router.get(     '/policy_years',       passport.authenticate('jwt', {session:false}), PolicyController.get);    
 router.post(     '/user/create_policy',       passport.authenticate('jwt', {session:false}), PolicyController.create_policy);    

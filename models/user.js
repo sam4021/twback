@@ -2,6 +2,8 @@
 const bcrypt 			= require('bcrypt');
 const bcrypt_p 			= require('bcrypt-promise');
 const jwt           	= require('jsonwebtoken');
+const Password          = require('./').passwords;
+const db     = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
     var Model = sequelize.define('users', {
@@ -31,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             if(err) TE(err.message, true);
 
             user.password = hash;
+            //Password.create({password:hash})
         }
     });
 
@@ -45,6 +48,37 @@ module.exports = (sequelize, DataTypes) => {
 
         return this;
     }
+    // Model.prototype.comparePassword = async function (user) {
+    //     console.log(user);
+    //     //console.log(getPass(user.email));
+    //     getId(user.email).then(function(result){
+    //         console.log(result);
+    //      });
+        
+    // }
+
+    // function getId(email_address) {
+    //     return Model.findOne({
+    //       where: {
+    //         email: email_address
+    //       },
+    //       include: [
+    //         {
+    //             model: db.passwords
+    //         }]
+    //     });
+    //  }
+
+    //  function getPass(email) {
+    //     getId(email).then(function(result){
+    //         return Password.findOne({
+    //             where: {
+    //               userId: result.id
+    //             }
+    //           });
+    //      });
+        
+    //  }
 
     Model.prototype.getJWT = function () {
         let expiration_time = parseInt(CONFIG.jwt_expiration);
