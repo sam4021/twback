@@ -23,11 +23,11 @@ const create_policy = async function(req, res){
     let err ;
     let day, month, year;
     day = date.getDay();
-    //day = moment().format('D'); 
-    month = date.getMonth();
-    //month  = moment().format('M'); 
-    year = date.getFullYear();
-    //year = moment().format('YYYY'); 
+    day = moment().format('D'); 
+    //month = date.getMonth();
+    month  = moment().format('M'); 
+    //year = date.getFullYear();
+    year = moment().format('YYYY'); 
     const body = req.body; 
     let user = req.user;
     body['userId'] = user.id;
@@ -38,13 +38,13 @@ const create_policy = async function(req, res){
     .then(async p => {
         let newYear = Number(year)+Number(p.years);
         
-        //var futureYear = moment(currentDate).add(newYear, 'Y');
+        var futureYear = moment(currentDate).add(newYear, 'Y');
         //var futureYearEnd = moment(futureYear).endOf('year');
-        body['maturity_date'] = day+'-'+month+'-'+ newYear;
-        //futureYear.format('DD-MM-YYYY')
+        body['maturity_date'] =  futureYear.format('DD-MM-YYYY')
         // moment().add(newYear, 'YYYY').format('DD-MM-YYYY');
         //day+'-'+month+'-'+ newYear;
-       [err, policy] = await to(UserPolicy.create(body)); log
+       [err, policy] = await to(UserPolicy.create(body)); console.log(err);
+       
 
         return ReS(res, {message:'Successfully Added Policy.', user:policy.toWeb()}, 201);
       });    
