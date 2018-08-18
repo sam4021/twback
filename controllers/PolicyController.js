@@ -35,7 +35,7 @@ const create_policy = async function(req, res){
     .then(async p => {
         let newYear = Number(year)+Number(p.years);
         
-        var futureYear = moment(currentDate).add(newYear, 'YYYY');
+        var futureYear = moment(currentDate).add(newYear, 'years');
         //var futureYearEnd = moment(futureYear).endOf('year');
         body['maturity_date'] =  futureYear;
         // moment().add(newYear, 'YYYY').format('DD-MM-YYYY');
