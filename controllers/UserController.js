@@ -61,7 +61,10 @@ const get = async function(req, res){
                          include:[
                              {
                                  model: db.policies
-                             }
+                             },
+                             {
+                                model: db.transactions
+                            }
                          ]
                      }
                    ]

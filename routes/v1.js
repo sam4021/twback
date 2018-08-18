@@ -8,6 +8,7 @@ const UserBankController 	= require('./../controllers/UserBankController');
 const BeneficiaryController 	= require('./../controllers/BeneficiaryController');
 const HomeController 	= require('./../controllers/HomeController');
 const PolicyController 	= require('./../controllers/PolicyController');
+const TransactionController 	= require('./../controllers/TransactionsController');
 
 //Admin Contollers
 const StaffController 	= require('./../controllers/Admin/StaffController');
@@ -43,6 +44,9 @@ router.put(     '/user_beneficiary/update',       passport.authenticate('jwt', {
 router.post(    '/user_kin/create',       passport.authenticate('jwt', {session:false}), UserInfoController.createKin); 
 router.get(     '/user_kin/get',       passport.authenticate('jwt', {session:false}), UserInfoController.getKin);       
 router.put(     '/user_kin/update',       passport.authenticate('jwt', {session:false}), UserInfoController.updateKin);
+
+router.post(    '/user_transaction/create',       passport.authenticate('jwt', {session:false}), TransactionController.create); 
+router.get(     '/user_transaction/get',       passport.authenticate('jwt', {session:false}), TransactionController.get);  
 
 router.get(     '/policy_years',       passport.authenticate('jwt', {session:false}), PolicyController.get);    
 router.post(     '/user/create_policy',       passport.authenticate('jwt', {session:false}), PolicyController.create_policy);    

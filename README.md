@@ -95,6 +95,7 @@ url | Action | Desc
 */policy_years* | **GET** | Get the types of policies
 */user/create_policy* | **POST** | create a user policy , includes user_id, policy_id 
 */user/policy_withdrawal_request* | **POST** | Client Request for a policy Withdrawal (amount is all money saved)
+*/user_transaction/create* | **POST** |
 
 ##### Admin:
 ```
@@ -527,6 +528,36 @@ Results
 }
 ```
 
+###### Users Transactions Info
+
+```
+/user_transaction/create
+POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+	"amount_paid" : "2000",
+    "transaction_ID" : "xxxx",
+    "type_of_transaction" : "Mpesa",
+    "userPolicyId" : "xxxx",
+    "phone": "xxxxxxxxxxx"
+}
+
+Results
+{
+    "message": "Successfully Added Transaction.",
+    "user": {
+        "id": "xxxxx",
+        "amount_paid": "2000",
+        "transaction_ID": "xxx",
+        "type_of_transaction": "xxxx",
+        "userPolicyId": "xxxxx",
+        "phone": "xxxxxxxxxxx",
+        "updatedAt": "2018-08-18T09:22:47.495Z",
+        "createdAt": "2018-08-18T09:22:47.495Z"
+    },
+    "success": true
+}
+```
+
 ```
 /user/create_policy
 POST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
@@ -681,3 +712,4 @@ variables:
 
 tfat=(tifc+tire)-leap*t
 rfc = tfat/tifc-1
+

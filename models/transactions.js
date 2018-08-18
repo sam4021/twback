@@ -11,17 +11,10 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4,
             allowNull: false
           },
-        user_id: {
-            type: DataTypes.UUID,
-            allowNull: false
-        },
-        policy_id: {
-            type: DataTypes.UUID,
-            allowNull: false
-        },
         amount_paid : DataTypes.INTEGER ,
         transaction_ID : DataTypes.STRING,
-        type_of_transaction : DataTypes.STRING
+        type_of_transaction : DataTypes.STRING,
+        phone: DataTypes.INTEGER
     });
 
     Model.prototype.getJWT = function () {
