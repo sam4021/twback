@@ -36,7 +36,8 @@ const create_policy = async function(req, res){
     Policies.findById(body['policyId'])
     .then(async p => {
         let newYear = Number(year)+Number(p.years);
-        body['maturity_date'] = day+'-'+month+'-'+ newYear;
+        body['maturity_date'] = moment().add(newYear, 'YYYY').format();
+        //day+'-'+month+'-'+ newYear;
        [err, policy] = await to(UserPolicy.create(body));
 
         return ReS(res, {message:'Successfully Added Policy.', user:policy.toWeb()}, 201);
