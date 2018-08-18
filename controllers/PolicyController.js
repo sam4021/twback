@@ -4,6 +4,7 @@ const WithdrawalRequest         = require('../models').user_policy_withdrawal_re
 const WithdrawalResponse         = require('../models').user_policy_withdrawal_response;
 const db     = require('../models/index');
 const date = new Date();
+const moment = require('moment');
 
 const get = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -21,9 +22,12 @@ const create_policy = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let err ;
     let day, month, year;
-    day = date.getDay();
-    month = date.getMonth();
-    year = date.getFullYear();
+    //day = date.getDay();
+    day = moment().format('D'); 
+    //month = date.getMonth();
+    month  = moment().format('M'); 
+    //year = date.getFullYear();
+    year = moment().format('YYYY'); 
     const body = req.body; 
     let user = req.user;
     body['userId'] = user.id;
