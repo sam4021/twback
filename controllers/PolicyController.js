@@ -43,7 +43,8 @@ const create_policy = async function(req, res){
         body['maturity_date'] = futureYear.format('DD-MM-YYYY')
         // moment().add(newYear, 'YYYY').format('DD-MM-YYYY');
         //day+'-'+month+'-'+ newYear;
-       [err, policy] = await to(UserPolicy.create(body));
+       [err, policy] = await to(UserPolicy.create(body)); console.log(err);
+       
 
         return ReS(res, {message:'Successfully Added Policy.', user:policy.toWeb()}, 201);
       });    
