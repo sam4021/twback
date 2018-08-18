@@ -31,7 +31,7 @@ const create_policy = async function(req, res){
     const body = req.body; 
     let user = req.user;
     body['userId'] = user.id;
-    body['inception_date'] = day+'-'+month+'-'+year;
+    body['inception_date'] = moment().format('D-M-YYYY');
      
     Policies.findById(body['policyId'])
     .then(async p => {
