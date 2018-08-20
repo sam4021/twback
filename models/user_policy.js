@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
           inception_date : DataTypes.DATE,
           maturity_date  : DataTypes.DATE,
           actual_premium : DataTypes.INTEGER,
+          paid_premium : {type: DataTypes.INTEGER, defaultValue: 0},
+          policy_number: DataTypes.STRING,
           policy_name : DataTypes.STRING
+
     });
 
     Model.prototype.toWeb = function (pw) {
