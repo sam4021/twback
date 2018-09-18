@@ -62,9 +62,9 @@ const get = async function(req, res){
                              {
                                  model: db.policies
                              },
-                             {
-                                model: db.transactions
-                            }
+                            //  {
+                            //     model: db.transactions
+                            // }
                          ]
                      }
                    ]

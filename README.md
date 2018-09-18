@@ -114,6 +114,8 @@ url | Action | Desc
 */admin/user/withdrawal_response/:user_id* | **POST** | Set User Aproval of withdrawal
 */admin/staff/update/:staff_id* | **PUT** | Update Staff Info From Super Admin
 */admin/get_all_policies* | **GET** | Get All the Policises
+*/admin/get_maturity* | **GET** | Get All Maturity
+*/admin/get_transactions* | **GET** | Get All Transactions
 
 ###### users
 ```
@@ -669,6 +671,151 @@ Results
     },
     "success": true
 }
+```
+
+```
+/admin/get_maturity
+GET :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+{
+    "policy": [
+        {
+            "id": "xxxxxxxxxxxx",
+            "inception_date": "2018-03-07T00:00:00.000Z",
+            "maturity_date": "2023-03-07T00:00:00.000Z",
+            "actual_premium": xxxx,
+            "paid_premium": null,
+            "policy_number": "",
+            "policy_name": null,
+            "createdAt": "2018-08-15T13:45:01.000Z",
+            "updatedAt": "2018-08-15T13:45:01.000Z",
+            "userId": "xxxxxxx",
+            "policyId": "xxxxx",
+            "user": {
+                "id": "xxxxx",
+                "first": "xx",
+                "middle": "xxx",
+                "last": "xxx",
+                "email": "xx@xx.xx.xx",
+                "createdAt": "2018-08-09T10:35:15.000Z",
+                "updatedAt": "2018-08-09T10:35:15.000Z"
+            }
+        },
+        {
+            "id": "xx",
+            "inception_date": "2018-03-07T00:00:00.000Z",
+            "maturity_date": "2021-03-07T00:00:00.000Z",
+            "actual_premium": xx,
+            "paid_premium": nuxxll,
+            "policy_number": "xx",
+            "policy_name": xx,
+            "createdAt": "2018-08-15T12:32:14.000Z",
+            "updatedAt": "2018-08-15T12:32:14.000Z",
+            "userId": "xxx",
+            "policyId": "xxx",
+            "user": {
+                "id": "xxxx",
+                "first": "xx",
+                "middle": "xx",
+                "last": "xx",
+                "email": "xx@xx.xx.xx",
+                "createdAt": "2018-08-09T10:35:15.000Z",
+                "updatedAt": "2018-08-09T10:35:15.000Z"
+            }
+        },
+        
+    ],
+    "success": true
+}
+
+```
+```
+/admin/user/withdrawal_response/:user_id
+GEST :: [{"key":"Authorization","type":"text","name":"Authorization","value":"Bearer xxxxxx"}]
+
+{
+    "transactions": [
+        {
+            "id": "xxxx",
+            "amount_paid": xxx,
+            "transaction_ID": "xxx",
+            "type_of_transaction": "xxx",
+            "phone": xxx,
+            "createdAt": "2018-08-20T05:48:12.000Z",
+            "updatedAt": "2018-08-20T05:48:12.000Z",
+            "userPolicyId": "xxxx",
+            "user_policy": {
+                "id": "xxxxxx",
+                "inception_date": "2018-03-07T00:00:00.000Z",
+                "maturity_date": "2021-03-07T00:00:00.000Z",
+                "actual_premium": xxx,
+                "paid_premium": xxx,
+                "policy_number": "xxx",
+                "policy_name": "xxxxx",
+                "createdAt": "2018-08-15T09:48:23.000Z",
+                "updatedAt": "2018-08-20T05:54:18.000Z",
+                "userId": "xxxx",
+                "policyId": "xxxx",
+                "policy": {
+                    "id": "xxx",
+                    "policy_name": "xxxx",
+                    "years": xx,
+                    "createdAt": "2018-07-11T09:47:34.000Z",
+                    "updatedAt": "2018-07-11T09:47:34.000Z"
+                },
+                "user": {
+                    "id": "xxxx",
+                    "first": "xxx",
+                    "middle": "xxx",
+                    "last": "xxx",
+                    "email": "xxx@xxx.xxx",
+                    "createdAt": "2018-07-12T11:31:13.000Z",
+                    "updatedAt": "2018-07-12T11:31:13.000Z"
+                }
+            }
+        },
+        {
+            "id": "xxx",
+            "amount_paid": xxx,
+            "transaction_ID": "xxx",
+            "type_of_transaction": "xxx",
+            "phone": xxx,
+            "createdAt": "2018-08-20T05:53:48.000Z",
+            "updatedAt": "2018-08-20T05:53:48.000Z",
+            "userPolicyId": "xxx",
+            "user_policy": {
+                "id": "xxx",
+                "inception_date": "2018-03-07T00:00:00.000Z",
+                "maturity_date": "2021-03-07T00:00:00.000Z",
+                "actual_premium": xxx,
+                "paid_premium": xxx,
+                "policy_number": "xxx",
+                "policy_name": xxx,
+                "createdAt": "2018-08-15T09:48:23.000Z",
+                "updatedAt": "2018-08-20T05:54:18.000Z",
+                "userId": "xxx",
+                "policyId": "xx",
+                "policy": {
+                    "id": "xx",
+                    "policy_name": "xxx",
+                    "years": xx,
+                    "createdAt": "2018-07-11T09:47:34.000Z",
+                    "updatedAt": "2018-07-11T09:47:34.000Z"
+                },
+                "user": {
+                    "id": "xxxx",
+                    "first": "xx",
+                    "middle": "xx",
+                    "last": "xx",
+                    "email": "xxx",
+                    "createdAt": "2018-07-12T11:31:13.000Z",
+                    "updatedAt": "2018-07-12T11:31:13.000Z"
+                }
+            }
+        }
+    ],
+    "success": true
+}
+
 ```
 
 

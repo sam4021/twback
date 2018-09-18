@@ -8,8 +8,8 @@ const db     = require('../models/index');
 
 module.exports = function(passport){
     var opts = {};
-    opts.jwtFromRequest = ExtractJwt.fromHeader("authorization");
-    //opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+    //opts.jwtFromRequest = ExtractJwt.fromHeader("authorization");
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
     opts.secretOrKey = CONFIG.jwt_encryption;
 
     passport.use(new JwtStrategy(opts, async function(jwt_payload, done){

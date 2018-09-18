@@ -13,6 +13,7 @@ const TransactionController 	= require('./../controllers/TransactionsController'
 //Admin Contollers
 const StaffController 	= require('./../controllers/Admin/StaffController');
 const UserAController 	= require('./../controllers/Admin/UserController');
+const PolicyAController 	= require('./../controllers/Admin/PolicyController');
 
 const passport      	= require('passport');
 const path              = require('path');
@@ -63,6 +64,8 @@ router.get(     '/admin/user/get_user_info/:user_id',       passport.authenticat
 router.get(     '/admin/get_all_policies',       passport.authenticate('jwt', {session:false}), PolicyController.getUserPolicies);  
 router.post(   '/admin/user/withdrawal_response/:user_id',       passport.authenticate('jwt', {session:false}), UserAController.withdrawal_response);  
 
+router.get(     '/admin/get_transactions',       passport.authenticate('jwt', {session:false}), PolicyAController.all_transactions);
+router.get(     '/admin/get_maturity',       passport.authenticate('jwt', {session:false}), PolicyAController.all_maturity);
 router.get('/dash', passport.authenticate('jwt', {session:false}),HomeController.Dashboard)
 
 //********* API DOCUMENTATION **********
