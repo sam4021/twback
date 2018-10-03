@@ -1,6 +1,7 @@
 const Transactions          = require('../models').transactions; 
 const User          = require('../models').user;
 const UserPolicy   = require('../models').user_policy;
+const MpesaCallback = require('../models').mpesa_callback;
 
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
@@ -38,3 +39,16 @@ const get = async function(req, res){
         });    
 }
 module.exports.get = get;
+
+const mpesa_callback = async function(req, res){
+    res.setHeader('Content-Type', 'application/json');
+    let err, callback;
+    const user_info = req.body;
+    console.log(user_info);
+
+    [err, callback] = await to(MpesaCallback.create(user_info));
+    if(err) return ReE(res, err, 422);
+
+    return ReS(res, {message:'Successfully Added Transaction.', user:callback.toWeb()}, 201);
+} 
+module.exports.mpesa_callback = mpesa_callback;

@@ -48,6 +48,7 @@ router.put(     '/user_kin/update',       passport.authenticate('jwt', {session:
 
 router.post(    '/user_transaction/create',       passport.authenticate('jwt', {session:false}), TransactionController.create); 
 router.get(     '/user_transaction/get',       passport.authenticate('jwt', {session:false}), TransactionController.get);  
+router.post(    '/user_transaction/mpesa_callback',       passport.authenticate('jwt', {session:false}), TransactionController.mpesa_callback); 
 
 router.get(     '/policy_years',       passport.authenticate('jwt', {session:false}), PolicyController.get);    
 router.post(     '/user/create_policy',       passport.authenticate('jwt', {session:false}), PolicyController.create_policy);    
