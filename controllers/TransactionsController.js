@@ -41,14 +41,27 @@ const get = async function(req, res){
 module.exports.get = get;
 
 const mpesa_callback = async function(req, res){
-    res.setHeader('Content-Type', 'application/json');
-    let err, callback;
-    const user_info = req.body;
-    console.log(user_info);
+    // res.setHeader('Content-Type', 'application/json');
+    // let err, callback;
+    // const user_info = req.body;
+    console.log(res);
 
-    [err, callback] = await to(MpesaCallback.create(user_info));
-    if(err) return ReE(res, err, 422);
+    // [err, callback] = await to(MpesaCallback.create(user_info));
+    // if(err) return ReE(res, err, 422);
 
-    return ReS(res, {message:'Successfully Added Transaction.', user:callback.toWeb()}, 201);
+    // return ReS(res, {message:'Successfully Added Transaction.', user:callback.toWeb()}, 201);
 } 
 module.exports.mpesa_callback = mpesa_callback;
+
+const mpesa_callbackG = async function(req, res){
+    // res.setHeader('Content-Type', 'application/json');
+    // let err, callback;
+    // const user_info = req.body;
+    console.log(res);
+
+    // [err, callback] = await to(MpesaCallback.create(user_info));
+    // if(err) return ReE(res, err, 422);
+
+    // return ReS(res, {message:'Successfully Added Transaction.', user:callback.toWeb()}, 201);
+} 
+module.exports.mpesa_callbackG = mpesa_callbackG;
