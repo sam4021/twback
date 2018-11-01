@@ -95,7 +95,7 @@ auth false
 localhost:3000/v1
 https://twback.herokuapp.com/v1
 ```
-
+https://twback.herokuapp.com/v1/user_transaction/mpesa_callback
 ##### Client:
 
 url | Action | Desc
