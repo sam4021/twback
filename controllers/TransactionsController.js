@@ -53,15 +53,19 @@ const mpesa_callback = async function(req, res){
 } 
 module.exports.mpesa_callback = mpesa_callback;
 
-const mpesa_callbackG = async function(req, res){
-    // res.setHeader('Content-Type', 'application/json');
-    // let err, callback;
-    // const user_info = req.body;
-    console.log(res);
-
-    // [err, callback] = await to(MpesaCallback.create(user_info));
-    // if(err) return ReE(res, err, 422);
-
-    // return ReS(res, {message:'Successfully Added Transaction.', user:callback.toWeb()}, 201);
+const mpesa_c2bvalidation = async function(req, res){
+    //app.post('/validation', function(req, res) {
+        console.log('-----------C2B VALIDATION REQUEST-----------');
+        console.log(prettyjson.render(req.body, options));
+        console.log('-----------------------');
+      
+        var message = {
+          "ResultCode": 0,
+          "ResultDesc": "Success",
+          "ThirdPartyTransID": "1234567890"
+        };
+      
+        res.json(message);
+      //});
 } 
-module.exports.mpesa_callbackG = mpesa_callbackG;
+module.exports.mpesa_c2bvalidation = mpesa_c2bvalidation;

@@ -1,3 +1,25 @@
+##########MPESA
+go to daraja get started
+safaricom github
+
+
+prompt from site
+->lipa na mpesa(mpesa express)
+
+apifeedback@safaricom.co.ke
+
+
+
+
+
+
+
+
+
+
+
+
+
 *Hey Guys,*
 *So we Need to have a complete process flow of the system, with a dummy account for mpesa and have maturity*
 
@@ -6,6 +28,8 @@
 auth false
 
 #####Next meeting wednesday
+
+
 
 #####CHANGES
 ```
