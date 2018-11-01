@@ -2,7 +2,11 @@ const Transactions          = require('../models').transactions;
 const User          = require('../models').user;
 const UserPolicy   = require('../models').user_policy;
 const MpesaCallback = require('../models').mpesa_callback;
-
+var prettyjson = require('prettyjson');
+var options = {
+    noColor: true
+  };
+  
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let err, transact,val;
