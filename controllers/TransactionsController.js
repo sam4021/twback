@@ -41,10 +41,20 @@ const get = async function(req, res){
 module.exports.get = get;
 
 const mpesa_callback = async function(req, res){
+    console.log('-----------C2B CONFIRMATION REQUEST------------');
+  console.log(prettyjson.render(req.body, options));
+  console.log('-----------------------');
+
+  var message = {
+    "ResultCode": 0,
+    "ResultDesc": "Success"
+  };
+
+  res.json(message);
     // res.setHeader('Content-Type', 'application/json');
     // let err, callback;
     // const user_info = req.body;
-    console.log(res);
+    //console.log(res);
 
     // [err, callback] = await to(MpesaCallback.create(user_info));
     // if(err) return ReE(res, err, 422);
