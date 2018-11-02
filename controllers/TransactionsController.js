@@ -6,7 +6,7 @@ var prettyjson = require('prettyjson');
 var options = {
     noColor: true
   };
-  
+
 const create = async function(req, res){
     res.setHeader('Content-Type', 'application/json');
     let err, transact,val;
@@ -46,6 +46,8 @@ module.exports.get = get;
 
 const mpesa_callback = async function(req, res){
     console.log('-----------C2B CONFIRMATION REQUEST------------');
+    console.log(req.body);
+    
   console.log(prettyjson.render(req.body, options));
   console.log('-----------------------');
 
@@ -69,6 +71,7 @@ module.exports.mpesa_callback = mpesa_callback;
 
 const mpesa_c2bvalidation = async function(req, res){
     //app.post('/validation', function(req, res) {
+        console.log(req.body);
         console.log('-----------C2B VALIDATION REQUEST-----------');
         console.log(prettyjson.render(req.body, options));
         console.log('-----------------------');
